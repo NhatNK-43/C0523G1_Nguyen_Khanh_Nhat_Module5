@@ -1,0 +1,17 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url('../img/facilities/BG2.jpg');
+    background-repeat: no-repeat;
+}
+#header{
+    background-image: url('../img/facilities/BG1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 250px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
