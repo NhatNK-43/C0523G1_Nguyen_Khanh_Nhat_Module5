@@ -7,19 +7,9 @@ const  sv1 = {
 
 
 
-let getInfo = sv=>{
-    let {firstName,degree} = sv;
-    if(firstName===undefined){
-        firstName =  'Quân';
-    }
-    if(degree===undefined){
-        degree = 'NA';
-    }
-    let sv2 = {
-        firstName,
-        degree
-    }
-    console.log(sv2);
+let getInfo = ({firstName = 'Quân', degree = 'NA'})=>{
+
+    console.log('FirstName: '+firstName+', Degree: '+degree);
 }
 
 getInfo(sv1);
