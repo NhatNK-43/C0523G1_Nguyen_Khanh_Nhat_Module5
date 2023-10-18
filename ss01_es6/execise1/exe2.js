@@ -27,6 +27,6 @@ let courses = [
 ];
 
 let result = courses.filter(item => item.rating<4)
-result.forEach(function (item){
+result.forEach(item => {
     console.log(item.id+' - '+item.title+' - '+item.rating)
 })
