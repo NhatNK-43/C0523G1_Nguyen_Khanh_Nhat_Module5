@@ -1,8 +1,5 @@
 const {Component} = require("react");
 class StudentList extends Component{
-    // constructor(props) {
-    //     super(props);
-    // }
     render() {
         return (
             <>

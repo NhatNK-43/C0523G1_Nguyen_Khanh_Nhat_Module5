@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import StudentList from "./components/student";
+import StudentList from "./components/StudentList";
 
 function App() {
     const studentList = [

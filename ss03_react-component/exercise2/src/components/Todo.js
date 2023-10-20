@@ -1,12 +1,9 @@
 const {Component} = require("react");
 
 class Todo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: [],
-            item: ""
-        }
+    state = {
+        list: [],
+        item: ""
     }
 
     handleChange = (event) => {
