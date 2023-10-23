@@ -1,4 +1,14 @@
-function CustomerList(){
+import {useEffect, useState} from "react";
+import {getAll} from "../../service/customer_service";
+export function CustomerList(){
+    const [customer, setCustomer] = useState([]);
+    useEffect(()=>{
+        display();
+    },[])
+    const display = async () => {
+        const res = await getAll()
+        setCustomer(res)
+    }
     return(
         <>
             <div id="header">
@@ -8,7 +18,6 @@ function CustomerList(){
                 <div>
                     <a
                         role="button"
-                        href="#"
                         className="btn btn-sm btn-primary mt-3 mb-3"
                     >
                         Create customer
@@ -25,15 +34,26 @@ function CustomerList(){
                             <th>Id Card</th>
                             <th>Phone Number</th>
                             <th>Email</th>
-                            <th>Customer type</th>
                             <th>Address</th>
-                            <th />
+                            <th>Customer type</th>
                         </tr>
                         </thead>
-                        <tbody id="content">
-                        <tr>
-
-                        </tr>
+                        <tbody>
+                        {
+                            customer.map((customer,index)=>(
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{customer.name}</td>
+                                    <td>{customer.dateOfBirth}</td>
+                                    <td>{customer.gender}</td>
+                                    <td>{customer.idCard}</td>
+                                    <td>{customer.phoneNumber}</td>
+                                    <td>{customer.email}</td>
+                                    <td>{customer.address}</td>
+                                    <td>{customer.customerType.name}</td>
+                                </tr>
+                            ))
+                        }
                         </tbody>
                     </table>
                 </div>
