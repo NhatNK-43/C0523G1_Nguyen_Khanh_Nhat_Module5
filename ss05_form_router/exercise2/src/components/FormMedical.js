@@ -1,28 +1,65 @@
 import {Form, Field, Formik, ErrorMessage} from "formik";
-import * as Yup from "yup"
+import * as Yup from "yup";
+import {toast} from "react-toastify";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export function FormMedical(){
+export function FormMedical() {
+    const navigate = useNavigate();
     const initValue = {
         name: "",
-        // email: "",
-        // phone: "",
-        // message: ""
+        idCard: "",
+        dateOfBirth: "",
+        gender: "",
+        nationality: "",
+        company: "",
+        department: "",
+        hasHealthInsurance: "",
+        province: "",
+        district: "",
+        ward: "",
+        houseNumber: "",
+        phoneNumber: "",
+        email: "",
+        movingHistory: "",
+        symptoms: [],
+        contact: [],
     };
     const validateObject = {
         name: Yup.string()
-            .required(),
-        // email: Yup.string()
-        //     .required()
-        //     .matches( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,"The email entered is invalid!"),
-        // phone: Yup.string()
-        //     .required()
-        //     .matches(/^0\\d{9}$/,"The phone number entered is invalid!")
+            .required("Vui lòng nhập họ và tên!"),
+        idCard: Yup.string()
+            .required("Vui lòng nhập số hộ chiếu /CMND!"),
+        dateOfBirth: Yup.date()
+            .required("Vui lòng nhập ngày sinh!")
+            .min("1900-01-01","Năm sinh phải lơn hơn 1990!"),
+        nationality: Yup.string()
+            .required("Vui lòng nhập quốc tịch!"),
+        province: Yup.string()
+            .required("Vui lòng nhập tỉnh /thành"),
+        district: Yup.string()
+            .required("Vui lòng nhập quận /huyện"),
+        ward: Yup.string()
+            .required("Vui lòng nhập phường /xã"),
+        houseNumber: Yup.string()
+            .required("Vui lòng nhập số nhà, phố, tổ dân phố /thôn /đội"),
+        phoneNumber: Yup.string()
+            .required("Vui lòng nhập số điện thoại"),
+        email: Yup.string()
+            .required()
+            .matches( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,"Email không hợp lệ!")
     }
-    return(
+    return (
         <>
             <Formik
                 initialValues={initValue}
                 onSubmit={values => {
+                    values.gender = +values.gender;
+                    values.hasHealthInsurance = +values.hasHealthInsurance;
+                    // console.log(values);
+                    toast.success("Đã gửi thành công!");
+                    navigate("/");
+                    // alert("Đã gửi thành công!");
                 }}
                 validationSchema={Yup.object(validateObject)}
             >
@@ -41,7 +78,7 @@ export function FormMedical(){
                         </div>
                         <div className="mt-3">
                             <label className="label-control" htmlFor="dateOfBirth">Ngày sinh</label>
-                            <Field type="text" className="form-control" id="dateOfBirth" name="dateOfBirth"/>
+                            <Field type="date" className="form-control" id="dateOfBirth" name="dateOfBirth"/>
                             <ErrorMessage name="dateOfBirth" component="span" style={{color: "red"}}></ErrorMessage>
                         </div>
                         <div className="mt-3">
@@ -76,17 +113,17 @@ export function FormMedical(){
                             <ErrorMessage name="department" component="span" style={{color: "red"}}></ErrorMessage>
                         </div>
                         <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="healthInsurance" name="healthInsurance"/>
-                                <label className="form-check-label" htmlFor="healthInsurance">Bảo hiểm y tế</label>
-                                <ErrorMessage name="healthInsurance" component="span" style={{color: "red"}}></ErrorMessage>
+                            <label className="form-check-label" htmlFor="hasHealthInsurance">Có bảo hiểm y tế</label>
+                            <Field type="checkbox" className="form-check-input" id="hasHealthInsurance"
+                                   name="hasHealthInsurance" value="1"/>
                         </div>
                         <div className="mt-3">
                             <h5>Địa chỉ liên lạc tại Việt Nam</h5>
                         </div>
                         <div className="mt-3">
-                            <label className="label-control" htmlFor="city">Tỉnh thành</label>
-                            <Field type="text" className="form-control" id="city" name="city"/>
-                            <ErrorMessage name="city" component="span" style={{color: "red"}}></ErrorMessage>
+                            <label className="label-control" htmlFor="province">Tỉnh thành</label>
+                            <Field type="text" className="form-control" id="province" name="province"/>
+                            <ErrorMessage name="province" component="span" style={{color: "red"}}></ErrorMessage>
                         </div>
                         <div className="mt-3">
                             <label className="label-control" htmlFor="district">Quận /huyện </label>
@@ -99,7 +136,8 @@ export function FormMedical(){
                             <ErrorMessage name="ward" component="span" style={{color: "red"}}></ErrorMessage>
                         </div>
                         <div className="mt-3">
-                            <label className="label-control" htmlFor="houseNumber">Số nhà, phố, tổ dân phố /thôn /đội </label>
+                            <label className="label-control" htmlFor="houseNumber">Số nhà, phố, tổ dân phố /thôn
+                                /đội </label>
                             <Field type="text" className="form-control" id="houseNumber" name="houseNumber"/>
                             <ErrorMessage name="houseNumber" component="span" style={{color: "red"}}></ErrorMessage>
                         </div>
@@ -117,7 +155,7 @@ export function FormMedical(){
                         <div className="mt-3">
                             <label className="label-control" htmlFor="movingHistory">
                                 <h5>Trong vòng 14 ngày qua, Anh/Chị có đến quốc gia /vùng lãnh thổ nào không?
-                                (Có thể đi qua nhiều quốc gia)</h5>
+                                    (Có thể đi qua nhiều quốc gia)</h5>
                             </label>
                             <Field type="textarea" className="form-control" id="movingHistory" name="movingHistory"/>
                             <ErrorMessage name="movingHistory" component="span" style={{color: "red"}}></ErrorMessage>
@@ -128,32 +166,34 @@ export function FormMedical(){
                                 <h5>Trong vòng 14 ngày qua, Anh/Chị có thấy xuất hiện dấu hiệu nào sau đây không?</h5>
                             </label>
                             <div className="form-check">
-                                <Field type="checkbox" className="form-check-input" id="fever" name="fever"/>
+                                <Field type="checkbox" className="form-check-input" id="fever" name="symptoms" value="fever"/>
                                 <label className="form-check-label" htmlFor="fever">Sốt</label>
                                 <ErrorMessage name="fever" component="span" style={{color: "red"}}></ErrorMessage>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="cough" name="cough"/>
+                                <Field type="checkbox" className="form-check-input" id="cough" name="symptoms" value="cough"/>
                                 <label className="form-check-label" htmlFor="cough">Ho</label>
                                 <ErrorMessage name="cough" component="span" style={{color: "red"}}></ErrorMessage>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="shortnessOfBreath" name="shortnessOfBreath"/>
+                                <Field type="checkbox" className="form-check-input" id="shortnessOfBreath"
+                                       name="symptoms" value="shortnessOfBreath"/>
                                 <label className="form-check-label" htmlFor="shortnessOfBreath">Khó thở</label>
-                                <ErrorMessage name="shortnessOfBreath" component="span" style={{color: "red"}}></ErrorMessage>
+                                <ErrorMessage name="shortnessOfBreath" component="span"
+                                              style={{color: "red"}}></ErrorMessage>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="pneumonia" name="pneumonia"/>
+                                <Field type="checkbox" className="form-check-input" id="pneumonia" name="symptoms" value="pneumonia"/>
                                 <label className="form-check-label" htmlFor="pneumonia">Viêm phổi</label>
                                 <ErrorMessage name="pneumonia" component="span" style={{color: "red"}}></ErrorMessage>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="soreThroat" name="soreThroat"/>
+                                <Field type="checkbox" className="form-check-input" id="soreThroat" name="symptoms" value="soreThroat"/>
                                 <label className="form-check-label" htmlFor="soreThroat">Đau họng</label>
                                 <ErrorMessage name="soreThroat" component="span" style={{color: "red"}}></ErrorMessage>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="tired" name="tired"/>
+                                <Field type="checkbox" className="form-check-input" id="tired" name="symptoms" value="tired"/>
                                 <label className="form-check-label" htmlFor="tired">Mệt mỏi</label>
                                 <ErrorMessage name="tired" component="span" style={{color: "red"}}></ErrorMessage>
                             </div>
@@ -164,16 +204,19 @@ export function FormMedical(){
                                 <h5>Trong vòng 14 ngày qua, Anh/Chị có tiếp xúc với?</h5>
                             </label>
                             <div className="form-check">
-                                <Field type="checkbox" className="form-check-input" id="patient" name="patient"/>
-                                <label className="form-check-label" htmlFor="patient">Người bệnh hoặc nghi ngờ mắc bệnh COVID-19</label>
+                                <Field type="checkbox" className="form-check-input" id="patient" name="contact" value="patient"/>
+                                <label className="form-check-label" htmlFor="patient">Người bệnh hoặc nghi ngờ mắc bệnh
+                                    COVID-19</label>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="epidemicArea" name="epidemicArea"/>
-                                <label className="form-check-label" htmlFor="epidemicArea">Người từ nước có bệnh COVID-19</label>
+                                <Field type="checkbox" className="form-check-input" id="epidemicArea"
+                                       name="contact" value="epidemicArea"/>
+                                <label className="form-check-label" htmlFor="epidemicArea">Người từ nước có bệnh
+                                    COVID-19</label>
                             </div>
                             <div className="mt-3 form-check">
-                                <Field type="checkbox" className="form-check-input" id="symptoms" name="symptoms"/>
-                                <label className="form-check-label" htmlFor="symptoms">
+                                <Field type="checkbox" className="form-check-input" id="peopleSymptoms" name="contact" value="peopleSymptoms"/>
+                                <label className="form-check-label" htmlFor="peopleSymptoms">
                                     Người có biểu hiện (Sốt, ho, khó thở, viêm phổi)</label>
                             </div>
                         </div>
