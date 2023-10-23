@@ -1,10 +1,9 @@
-const {useState} = require("react");
+import {useIncrement} from "../customHook";
 
 export function Counter2() {
-    const [count, setCounter] = useState(0);
+    const [count, setCounter2] = useIncrement(2);
     const increase = () => {
-        setCounter(prev => prev + 1)
-        setCounter(prev => prev + 1)
+        setCounter2();
     }
     return (
         <>
