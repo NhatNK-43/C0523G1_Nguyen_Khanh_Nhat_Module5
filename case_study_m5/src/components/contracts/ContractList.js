@@ -1,4 +1,15 @@
-function ContractList() {
+import {useEffect, useState} from "react";
+import {getAll} from "../../service/contract_service";
+
+export function ContractList() {
+    const [contract, setContract] = useState([]);
+    useEffect(()=>{
+        display();
+    },[])
+    const display = async () => {
+        const res = await getAll()
+        setContract(res)
+    }
     return (
         <>
             <div id="header">
@@ -26,10 +37,19 @@ function ContractList() {
                             <th>Total Payment</th>
                         </tr>
                         </thead>
-                        <tbody id="content">
-                        <tr>
-
-                        </tr>
+                        <tbody>
+                        {
+                            contract.map((contract,index)=>(
+                                <tr key={index}>
+                                    <td>{index+1}</td>
+                                    <td>{contract.contractCode}</td>
+                                    <td>{contract.startDate}</td>
+                                    <td>{contract.endDate}</td>
+                                    <td>{contract.deposit}</td>
+                                    <td>{contract.totalPayment}</td>
+                                </tr>
+                            ))
+                        }
                         </tbody>
                     </table>
                 </div>

@@ -541,6 +541,7 @@
   "contract": [
     {
       "id": "1",
+      "contractCode": "HD-0001",
       "startDate": "2020-12-08",
       "endDate": "2020-12-08",
       "deposit": "0",
@@ -548,6 +549,7 @@
     },
     {
       "id": "2",
+      "contractCode": "HD-0002",
       "startDate": "2020-07-14",
       "endDate": "2020-07-21",
       "deposit": "200000",
@@ -555,6 +557,7 @@
     },
     {
       "id": "3",
+      "contractCode": "HD-0003",
       "startDate": "2021-03-15",
       "endDate": "2021-03-17",
       "deposit": "50000",
@@ -562,6 +565,7 @@
     },
     {
       "id": "4",
+      "contractCode": "HD-0004",
       "startDate": "2021-01-14",
       "endDate": "2021-01-18",
       "deposit": "100000",
@@ -569,6 +573,7 @@
     },
     {
       "id": "5",
+      "contractCode": "HD-0005",
       "startDate": "2021-07-14",
       "endDate": "2021-07-15",
       "deposit": "0",
@@ -576,6 +581,7 @@
     },
     {
       "id": "6",
+      "contractCode": "HD-0006",
       "startDate": "2021-06-01",
       "endDate": "2021-06-03",
       "deposit": "0",
@@ -583,6 +589,7 @@
     },
     {
       "id": "7",
+      "contractCode": "HD-0007",
       "startDate": "2021-09-02",
       "endDate": "2021-09-05",
       "deposit": "100000",
@@ -590,6 +597,7 @@
     },
     {
       "id": "8",
+      "contractCode": "HD-0008",
       "startDate": "2021-06-17",
       "endDate": "2021-06-18",
       "deposit": "150000",
@@ -597,6 +605,7 @@
     },
     {
       "id": "9",
+      "contractCode": "HD-0009",
       "startDate": "2020-11-19",
       "endDate": "2020-11-19",
       "deposit": "0",
@@ -604,6 +613,7 @@
     },
     {
       "id": "10",
+      "contractCode": "HD-0010",
       "startDate": "2021-04-12",
       "endDate": "2021-04-14",
       "deposit": "0",
@@ -611,6 +621,7 @@
     },
     {
       "id": "11",
+      "contractCode": "HD-0011",
       "startDate": "2021-04-25",
       "endDate": "2021-04-25",
       "deposit": "0",
@@ -618,6 +629,7 @@
     },
     {
       "id": "12",
+      "contractCode": "HD-0012",
       "startDate": "2021-05-25",
       "endDate": "2021-05-27",
       "deposit": "0",
