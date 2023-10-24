@@ -528,12 +528,203 @@
     }
   ],
 
-
-  "facility": [
+  "accompaniedService":[
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "Massage",
+      "unit": "Person",
+      "price": 500000
+    },
+    {
+      "id": 2,
+      "name": "Karaoke",
+      "unit": "Hours",
+      "price": 300000
+    },
+    {
+      "id": 3,
+      "name": "Food",
+      "unit": "Portion",
+      "price": 150000
+    },
+    {
+      "id": 4,
+      "name": "Drink",
+      "unit": "Portion",
+      "price": 50000
+    },
+    {
+      "id": 5,
+      "name": "Car rental",
+      "unit": "Person",
+      "price": 70000
+    }
+  ],
+
+  "facility":[
+    {
+      "id": "1",
+      "name": "SEA VIEW SUITE",
+      "area": "85,8",
+      "rentalCosts": "6800000",
+      "capacity": "2",
+      "rentalType": "day",
+      "pathImage": "images/facilities/1-Ocean-Suite-Feature-768x497.jpg",
+      "roomStandards": "Suite",
+      "freeService": "Have breakfast",
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "2",
+      "name": "STUDIO SUITE SEA VIEW",
+      "area": "40,1",
+      "rentalCosts": "4500000",
+      "capacity": "2",
+      "rentalType": "day",
+      "pathImage": "images/facilities/2-Ocean-Studio-Suite-F-768x497.jpg",
+      "roomStandards": "Suite",
+      "freeService": "Have breakfast",
+      "accompaniedService": [
+        {
+          "id": 1,
+          "name": "Massage",
+          "unit": "Person",
+          "price": 500000
+        },
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }]
+    },
+    {
+      "id": "3",
+      "name": "DELUXE ROOM SEA VIEW",
+      "area": "43,7",
+      "rentalCosts": "5700000",
+      "capacity": "2",
+      "rentalType": "day",
+      "pathImage": "images/facilities/3-Ocean-Deluxe-2-450x291.jpg",
+      "roomStandards": "Deluxe",
+      "freeService": "Have breakfast",
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "4",
+      "name": "SUPERIOR LAKE VIEW ROOM",
+      "area": "40,1",
+      "rentalCosts": "4200000",
+      "capacity": "4",
+      "rentalType": "day",
+      "pathImage": "images/facilities/4-Lagoon-Superior-twin-bed-F-768x497.jpg",
+      "roomStandards": "Superior",
+      "freeService": "Have breakfast",
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "5",
+      "name": "SUPERIOR ROOM GARDEN VIEW",
+      "area": "40,1",
+      "rentalCosts": "4200000",
+      "capacity": "4",
+      "rentalType": "day",
+      "pathImage": "images/facilities/5-Garden-Superior-TwinBed-1-F-768x497.jpg",
+      "roomStandards": "Superior",
+      "freeService": "Have breakfast",
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "6",
+      "name": "DELUXE ROOM GARDEN VIEW",
+      "area": "43,7",
+      "rentalCosts": "4800000",
+      "capacity": "4",
+      "rentalType": "day",
+      "pathImage": "images/facilities/6-Garden-Deluxe-5-450x291.jpg",
+      "roomStandards": "Deluxe",
+      "freeService": "Have breakfast",
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "7",
+      "name": "PRESIDENTIAL SUITE",
+      "area": "130",
+      "rentalCosts": "12000000",
+      "capacity": "2",
+      "rentalType": "day",
+      "pathImage": "images/facilities/7-Presidential-Suite-F-768x497.jpg",
+      "roomStandards": "Presidental",
+      "freeService": "Have breakfast",
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "8",
+      "name": "SEA VIEW VILLA WITH PRIVATE SWIMMING POOL",
+      "area": "900",
+      "rentalCosts": "25000000",
+      "capacity": "8",
+      "rentalType": "day",
+      "pathImage": "images/facilities/8-Villas_Beach_Pool_Villas-_Exterior-1-F-768x497.jpg",
+      "roomStandards": "Villa",
+      "otherUtilities": ["Free wifi", "Hairdryer", "Air conditional", "Minibar"],
+      "poolArea": 40,
+      "numberFloor": 2,
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
+    },
+    {
+      "id": "9",
+      "name": "GARDEN VIEW VILLA WITH PRIVATE POOL",
+      "area": "320",
+      "rentalCosts": "16000000",
+      "capacity": "6",
+      "rentalType": "day",
+      "pathImage": "images/facilities/9-Villas_Pool_Villas-F-768x497.jpg",
+      "roomStandards": "Villa",
+      "otherUtilities": ["Free wifi", "Hairdryer", "Air conditional", "Minibar"],
+      "poolArea": 40,
+      "numberFloor": 2,
+      "accompaniedService": [{
+        "id": 2,
+        "name": "Karaoke",
+        "unit": "Hours",
+        "price": 300000
+      }]
     }
   ],
 

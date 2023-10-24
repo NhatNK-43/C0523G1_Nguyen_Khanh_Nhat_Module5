@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
-import {getAll} from "../../service/customer_service";
-export function CustomerList(){
+import * as customerService from "../../service/customer_service";
+export function CustomerList() {
     const [customer, setCustomer] = useState([]);
-    useEffect(()=>{
-        display();
-    },[])
-    const display = async () => {
-        const res = await getAll()
-        setCustomer(res)
+    useEffect(() => {
+        getAll();
+    }, [])
+    const getAll = async () => {
+        const response = await customerService.getAllCustomer();
+        setCustomer(response);
     }
-    return(
+    return (
         <>
             <div id="header">
                 <h1>Customer</h1>
@@ -40,12 +40,12 @@ export function CustomerList(){
                         </thead>
                         <tbody>
                         {
-                            customer.map((customer,index)=>(
-                                <tr key={index}>
+                            customer.map((customer, index) => (
+                                <tr key={customer.id}>
                                     <td>{index + 1}</td>
                                     <td>{customer.name}</td>
                                     <td>{customer.dateOfBirth}</td>
-                                    <td>{customer.gender}</td>
+                                    <td>{customer.gender === 1 ? "Nam" : "Nữ"}</td>
                                     <td>{customer.idCard}</td>
                                     <td>{customer.phoneNumber}</td>
                                     <td>{customer.email}</td>

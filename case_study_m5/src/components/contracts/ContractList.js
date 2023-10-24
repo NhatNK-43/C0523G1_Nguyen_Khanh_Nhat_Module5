@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
-import {getAll} from "../../service/contract_service";
+import * as contractService from "../../service/contract_service";
 
 export function ContractList() {
     const [contract, setContract] = useState([]);
     useEffect(()=>{
-        display();
+        getAll();
     },[])
-    const display = async () => {
-        const res = await getAll()
-        setContract(res)
+    const getAll = async () => {
+        const response = await contractService.getAllContract();
+        setContract(response);
     }
     return (
         <>

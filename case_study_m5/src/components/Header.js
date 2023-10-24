@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 function Header() {
     return (
@@ -7,7 +8,7 @@ function Header() {
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
                         <a className="navbar-brand" href="#">
-                            <img src="https://furamavietnam.com/wp-content/uploads/2018/08/logo.png" height="70px"/>
+                            <img src="images/logo-furama.png" style={{height:"70px"}} alt="..."/>
                         </a>
                         <button
                             className="navbar-toggler"

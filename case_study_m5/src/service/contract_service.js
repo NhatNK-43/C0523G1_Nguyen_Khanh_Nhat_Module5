@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const getAll = async () =>{
+export const getAllContract = async () =>{
     try {
-        const res = await axios.get('http://localhost:8080/contract');
-        return res.data;
+        const response = await axios.get('http://localhost:8080/contract');
+        return response.data;
     } catch (e){
         alert("Error!")
     }
