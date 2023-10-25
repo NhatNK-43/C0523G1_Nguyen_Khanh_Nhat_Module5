@@ -49,17 +49,21 @@ export function FormMedical() {
             .required()
             .matches( /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,"Email không hợp lệ!")
     }
+
+    const create = (values) => {
+        values.gender = +values.gender;
+        values.hasHealthInsurance = +values.hasHealthInsurance;
+        console.log(values);
+        toast.success("Đã gửi thành công!");
+        navigate("/");
+    }
+    
     return (
         <>
             <Formik
                 initialValues={initValue}
                 onSubmit={values => {
-                    values.gender = +values.gender;
-                    values.hasHealthInsurance = +values.hasHealthInsurance;
-                    // console.log(values);
-                    toast.success("Đã gửi thành công!");
-                    navigate("/");
-                    // alert("Đã gửi thành công!");
+                    create(values);
                 }}
                 validationSchema={Yup.object(validateObject)}
             >
