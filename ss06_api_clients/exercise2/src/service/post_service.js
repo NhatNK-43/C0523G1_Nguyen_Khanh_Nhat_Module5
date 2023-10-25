@@ -35,3 +35,12 @@ export const updateBook = async (value) => {
 
     }
 }
+
+export const deleteBook  = async (id) => {
+    try {
+        let response = await axios.delete(`http://localhost:8080/posts/${id}`);
+        return response.status;
+    } catch (e) {
+
+    }
+}

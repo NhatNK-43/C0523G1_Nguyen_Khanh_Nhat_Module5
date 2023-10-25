@@ -14,10 +14,10 @@ export function BookCreate() {
         let bookStatus = await postService.createBook(value);
         if (bookStatus===201){
             toast.success("Add successfully!");
-            navigate("/")
+            navigate("/");
         } else {
             toast.error("Add failed");
-            navigate("/create")
+            navigate("/create");
         }
     }
 
