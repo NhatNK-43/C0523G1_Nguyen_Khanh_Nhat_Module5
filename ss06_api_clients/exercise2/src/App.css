@@ -37,15 +37,10 @@
   }
 }
 
-/*#numberHead{*/
-/*  width: 5%;*/
-/*}*/
-/*#titleHead{*/
-/*  width: 60%;*/
-/*}*/
-/*#quantityHead{*/
-/*  width: 15%;*/
-/*}*/
-/*#actionHead{*/
-/*  width: 20%;*/
-/*}*/
+.action {
+  text-align: center;
+}
+
+.action button{
+  width: 60px;
+}

@@ -28,7 +28,12 @@
     {
       "id": 6,
       "title": "Xây dựng ứng dụng Quản lý sách",
-      "quantity": "10"
+      "quantity": 12
+    },
+    {
+      "title": "Ứng dụng xây dựng thư viện sách",
+      "quantity": 13,
+      "id": 7
     }
   ]
 }
