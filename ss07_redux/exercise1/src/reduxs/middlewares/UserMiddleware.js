@@ -1,5 +1,5 @@
 import * as userService from "../../services/user_service"
-import {GET_ALL} from "../ActionType";
+import {DELETE, GET_ALL} from "../ActionType";
 
 export const getAll = () => async (dispatch) => {
     const data = await userService.getAll();
@@ -18,4 +18,14 @@ export const getAll = () => async (dispatch) => {
 //         })
 //     }
 // }
+
+export const remove = (id) => async (dispatch) => {
+    const res = await userService.remove(id);
+    if (res === 200) {
+        dispatch({
+            action: DELETE,
+            payload: id
+        })
+    }
+}
 

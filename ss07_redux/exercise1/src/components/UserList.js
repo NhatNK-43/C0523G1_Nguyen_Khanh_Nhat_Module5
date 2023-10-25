@@ -1,22 +1,30 @@
-import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import store from "../reduxs/Store";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getAll} from "../reduxs/middlewares/UserMiddleware";
+import {ModalConfirm} from "./ModalConfirm";
 
 
-export function UserList(){
-    const users = useSelector ((store) => store.users);
+export function UserList() {
+    const users = useSelector((store) => store.users);
     const dispatch = useDispatch();
+    const [idDelete, setIdDelete] = useState();
+    const [nameDelete, setNameDelete] = useState();
+    const [isShowModal, setIsShowModal] = useState(false);
 
     useEffect(() => {
         dispatch(getAll())
     }, []);
 
-    if(!users){
+    const handleShowModal = (id, name) => {
+        setIsShowModal(true);
+        setIdDelete(id);
+        setNameDelete(name);
+    }
+
+    if (!users) {
         return null;
     }
-    return(
+    return (
         <>
             <div className="container">
                 <h2>User List</h2>
@@ -34,14 +42,18 @@ export function UserList(){
                         </thead>
                         <tbody className="table-group-divider">
                         {
-                            users.map(user=>(
+                            users.map(user => (
                                 <tr key={user.id}>
                                     <td>{user.id}</td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.website}</td>
                                     <td>
-                                        <button className="btn btn-danger btn-sm">Delete user</button>
+                                        <button className="btn btn-danger btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"
+                                                onClick={() => handleShowModal(user.id, user.name)}>Delete user
+                                        </button>
                                     </td>
                                 </tr>
                             ))
@@ -50,6 +62,13 @@ export function UserList(){
                     </table>
                 </div>
             </div>
+            {/*{isShowModal &&*/}
+            <ModalConfirm
+                isShowModal={isShowModal}
+                idDelete={idDelete}
+                nameDelete={nameDelete}
+            />
+            {/*}*/}
         </>
     )
 }

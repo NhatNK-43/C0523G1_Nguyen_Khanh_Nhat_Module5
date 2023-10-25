@@ -1,4 +1,4 @@
-import {GET_ALL} from "../ActionType";
+import {DELETE, GET_ALL} from "../ActionType";
 
 const userReducer = (users = [], action) => {
     const {type, payload} = action;
@@ -7,6 +7,8 @@ const userReducer = (users = [], action) => {
             return payload;
         // case CREATE:
         //     return [...users, payload];
+        case DELETE:
+            return users.filter((user) => user.id !== payload);
         default:
             return users;
     }
