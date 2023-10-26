@@ -9,14 +9,14 @@ export function UserList() {
     const dispatch = useDispatch();
     const [idDelete, setIdDelete] = useState();
     const [nameDelete, setNameDelete] = useState();
-    const [isShowModal, setIsShowModal] = useState(false);
+    // const [isShowModal, setIsShowModal] = useState(false);
 
     useEffect(() => {
         dispatch(getAll())
     }, []);
 
     const handleShowModal = (id, name) => {
-        setIsShowModal(true);
+        // setIsShowModal(true);
         setIdDelete(id);
         setNameDelete(name);
     }
@@ -64,7 +64,7 @@ export function UserList() {
             </div>
             {/*{isShowModal &&*/}
             <ModalConfirm
-                isShowModal={isShowModal}
+                // isShowModal={isShowModal}
                 idDelete={idDelete}
                 nameDelete={nameDelete}
             />

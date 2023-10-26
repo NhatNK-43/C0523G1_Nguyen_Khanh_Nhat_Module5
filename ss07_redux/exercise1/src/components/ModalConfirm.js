@@ -4,12 +4,12 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify";
 
-export function ModalConfirm(object) {
+export function ModalConfirm({idDelete, nameDelete}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleDelete = ()=>{
-        dispatch(remove(object.idDelete));
-        navigate("/");
+        dispatch(remove(idDelete));
+        // navigate("/");
         toast.success("Delete successfully");
     }
     return (
@@ -39,7 +39,7 @@ export function ModalConfirm(object) {
                         </div>
                         <div className="modal-body">
                             Are you sure you want to delete user name: <span className="text-danger fw-bold">
-                                {object.nameDelete}</span>
+                                {nameDelete}</span>
                         </div>
                         <div className="modal-footer">
                             <button

@@ -23,7 +23,7 @@ export const remove = (id) => async (dispatch) => {
     const res = await userService.remove(id);
     if (res === 200) {
         dispatch({
-            action: DELETE,
+            type: DELETE,
             payload: id
         })
     }
