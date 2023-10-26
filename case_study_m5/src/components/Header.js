@@ -1,14 +1,13 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
 
 function Header() {
     return (
         <>
-            <div className="header">
+            <div className="header fixed-top">
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
                         <a className="navbar-brand" href="#">
-                            <img src="images/logo-furama.png" style={{height:"70px"}} alt="..."/>
+                            <img src="/images/logo-furama.png" style={{height:"70px"}} alt="..."/>
                         </a>
                         <button
                             className="navbar-toggler"

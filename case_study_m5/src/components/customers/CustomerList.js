@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import * as customerService from "../../service/customer_service";
+import {NavLink} from "react-router-dom";
 export function CustomerList() {
     const [customer, setCustomer] = useState([]);
     useEffect(() => {
@@ -11,31 +12,29 @@ export function CustomerList() {
     }
     return (
         <>
-            <div id="header">
-                <h1>Customer</h1>
-            </div>
-            <div className="container-fluid">
+            <div className="body container-fluid">
                 <div>
-                    <a
-                        role="button"
-                        className="btn btn-sm btn-primary mt-3 mb-3"
+                    <NavLink
+                        to="/customers/create"
+                        className="btn btn-sm btn-primary mt-3 mb-3 rounded-0"
                     >
                         Create customer
-                    </a>
+                    </NavLink>
                 </div>
                 <div>
-                    <table className="table table-hover">
-                        <thead>
+                    <table className="table table-hover border">
+                        <thead className="table-primary">
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Date of birth</th>
-                            <th>Gender</th>
-                            <th>Id Card</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Customer type</th>
+                            <th scope="col" className="">#</th>
+                            <th scope="col" className="">Name</th>
+                            <th scope="col" className="">Date of birth</th>
+                            <th scope="col" className="">Gender</th>
+                            {/*<th>Id Card</th>*/}
+                            {/*<th>Phone Number</th>*/}
+                            {/*<th>Email</th>*/}
+                            <th scope="col" className="">Address</th>
+                            <th scope="col" className="">Customer type</th>
+                            <th scope="col" className="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,11 +45,15 @@ export function CustomerList() {
                                     <td>{customer.name}</td>
                                     <td>{customer.dateOfBirth}</td>
                                     <td>{customer.gender === 1 ? "Nam" : "Nữ"}</td>
-                                    <td>{customer.idCard}</td>
-                                    <td>{customer.phoneNumber}</td>
-                                    <td>{customer.email}</td>
+                                    {/*<td>{customer.idCard}</td>*/}
+                                    {/*<td>{customer.phoneNumber}</td>*/}
+                                    {/*<td>{customer.email}</td>*/}
                                     <td>{customer.address}</td>
                                     <td>{customer.customerType.name}</td>
+                                    <td className="text-center">
+                                        <NavLink to={`/customers/update/${customer.id}`} className="btn btn-sm btn-outline-primary me-4 rounded-0">Update</NavLink>
+                                        <button className="btn btn-sm btn-outline-danger rounded-0">Delete</button>
+                                    </td>
                                 </tr>
                             ))
                         }

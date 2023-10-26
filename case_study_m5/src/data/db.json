@@ -21,7 +21,7 @@
       "name": "Diamond"
     }
   ],
-  "customer": [
+  "customers": [
     {
       "id": 1,
       "name": "Hoàng Thái Sơn",
@@ -525,10 +525,65 @@
         "id": 1,
         "name": "Member"
       }
+    },
+    {
+      "name": "Nguyễn Khánh Nhật",
+      "dateOfBirth": "1998-11-06",
+      "gender": 1,
+      "idCard": "849584738394",
+      "phoneNumber": "0783495322",
+      "email": "khanh.nhat.365@gmail.com",
+      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
+      "customerType": {
+        "id": 1,
+        "name": "Member"
+      },
+      "id": 37
+    },
+    {
+      "name": "Nguyễn Khánh Nhật",
+      "dateOfBirth": "1996-11-06",
+      "gender": 1,
+      "idCard": "012345698712",
+      "phoneNumber": "0783495322",
+      "email": "khanh.nhat.365@gmail.com",
+      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
+      "customerType": {
+        "id": 1,
+        "name": "Member"
+      },
+      "id": 38
+    },
+    {
+      "name": "Nguyễn Khánh Nhật",
+      "dateOfBirth": "6221-02-15",
+      "gender": 1,
+      "idCard": "012345698719",
+      "phoneNumber": "0783495322",
+      "email": "khanh.nhat.365@gmail.com",
+      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
+      "customerType": {
+        "id": 1,
+        "name": "Member"
+      },
+      "id": 39
+    },
+    {
+      "name": "Nguyễn Khánh Nhật",
+      "dateOfBirth": "1222-03-12",
+      "gender": 1,
+      "idCard": "849584759483",
+      "phoneNumber": "0783495322",
+      "email": "khanh.nhat.365@gmail.com",
+      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
+      "customerType": {
+        "id": 1,
+        "name": "Member"
+      },
+      "id": 40
     }
   ],
-
-  "accompaniedService":[
+  "accompaniedService": [
     {
       "id": 1,
       "name": "Massage",
@@ -560,8 +615,7 @@
       "price": 70000
     }
   ],
-
-  "facility":[
+  "facilities": [
     {
       "id": "1",
       "name": "SEA VIEW SUITE",
@@ -572,12 +626,14 @@
       "pathImage": "images/facilities/1-Ocean-Suite-Feature-768x497.jpg",
       "roomStandards": "Suite",
       "freeService": "Have breakfast",
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "2",
@@ -601,7 +657,8 @@
           "name": "Karaoke",
           "unit": "Hours",
           "price": 300000
-        }]
+        }
+      ]
     },
     {
       "id": "3",
@@ -613,12 +670,14 @@
       "pathImage": "images/facilities/3-Ocean-Deluxe-2-450x291.jpg",
       "roomStandards": "Deluxe",
       "freeService": "Have breakfast",
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "4",
@@ -630,12 +689,14 @@
       "pathImage": "images/facilities/4-Lagoon-Superior-twin-bed-F-768x497.jpg",
       "roomStandards": "Superior",
       "freeService": "Have breakfast",
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "5",
@@ -647,12 +708,14 @@
       "pathImage": "images/facilities/5-Garden-Superior-TwinBed-1-F-768x497.jpg",
       "roomStandards": "Superior",
       "freeService": "Have breakfast",
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "6",
@@ -664,12 +727,14 @@
       "pathImage": "images/facilities/6-Garden-Deluxe-5-450x291.jpg",
       "roomStandards": "Deluxe",
       "freeService": "Have breakfast",
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "7",
@@ -681,12 +746,14 @@
       "pathImage": "images/facilities/7-Presidential-Suite-F-768x497.jpg",
       "roomStandards": "Presidental",
       "freeService": "Have breakfast",
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "8",
@@ -697,15 +764,22 @@
       "rentalType": "day",
       "pathImage": "images/facilities/8-Villas_Beach_Pool_Villas-_Exterior-1-F-768x497.jpg",
       "roomStandards": "Villa",
-      "otherUtilities": ["Free wifi", "Hairdryer", "Air conditional", "Minibar"],
+      "otherUtilities": [
+        "Free wifi",
+        "Hairdryer",
+        "Air conditional",
+        "Minibar"
+      ],
       "poolArea": 40,
       "numberFloor": 2,
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     },
     {
       "id": "9",
@@ -716,20 +790,25 @@
       "rentalType": "day",
       "pathImage": "images/facilities/9-Villas_Pool_Villas-F-768x497.jpg",
       "roomStandards": "Villa",
-      "otherUtilities": ["Free wifi", "Hairdryer", "Air conditional", "Minibar"],
+      "otherUtilities": [
+        "Free wifi",
+        "Hairdryer",
+        "Air conditional",
+        "Minibar"
+      ],
       "poolArea": 40,
       "numberFloor": 2,
-      "accompaniedService": [{
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }]
+      "accompaniedService": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
+      ]
     }
   ],
-
-
-  "contract": [
+  "contracts": [
     {
       "id": "1",
       "contractCode": "HD-0001",
