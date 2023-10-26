@@ -525,62 +525,6 @@
         "id": 1,
         "name": "Member"
       }
-    },
-    {
-      "name": "Nguyễn Khánh Nhật",
-      "dateOfBirth": "1998-11-06",
-      "gender": 1,
-      "idCard": "849584738394",
-      "phoneNumber": "0783495322",
-      "email": "khanh.nhat.365@gmail.com",
-      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
-      "customerType": {
-        "id": 1,
-        "name": "Member"
-      },
-      "id": 37
-    },
-    {
-      "name": "Nguyễn Khánh Nhật",
-      "dateOfBirth": "1996-11-06",
-      "gender": 1,
-      "idCard": "012345698712",
-      "phoneNumber": "0783495322",
-      "email": "khanh.nhat.365@gmail.com",
-      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
-      "customerType": {
-        "id": 1,
-        "name": "Member"
-      },
-      "id": 38
-    },
-    {
-      "name": "Nguyễn Khánh Nhật",
-      "dateOfBirth": "6221-02-15",
-      "gender": 1,
-      "idCard": "012345698719",
-      "phoneNumber": "0783495322",
-      "email": "khanh.nhat.365@gmail.com",
-      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
-      "customerType": {
-        "id": 1,
-        "name": "Member"
-      },
-      "id": 39
-    },
-    {
-      "name": "Nguyễn Khánh Nhật",
-      "dateOfBirth": "1222-03-12",
-      "gender": 1,
-      "idCard": "849584759483",
-      "phoneNumber": "0783495322",
-      "email": "khanh.nhat.365@gmail.com",
-      "address": "11 Quang Dũng, phường Vĩnh Trung, quận Thanh Khê",
-      "customerType": {
-        "id": 1,
-        "name": "Member"
-      },
-      "id": 40
     }
   ],
   "accompaniedService": [

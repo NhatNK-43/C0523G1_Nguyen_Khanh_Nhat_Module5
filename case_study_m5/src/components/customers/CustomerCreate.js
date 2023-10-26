@@ -35,7 +35,7 @@ export function CustomerCreate() {
     return (
         <>
             <div className="body">
-                <div className="row mt-5 m-0">
+                <div className="row pt-5 m-0">
                     <div className="col-md-3"/>
                     <div className="col-md-6">
                         <div className="form-control p-3 rounded-0">

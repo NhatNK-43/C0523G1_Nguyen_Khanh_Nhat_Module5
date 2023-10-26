@@ -1,15 +1,29 @@
 import {useEffect, useState} from "react";
 import * as customerService from "../../service/customer_service";
 import {NavLink} from "react-router-dom";
+import {ModalDeleteCustomer} from "./ModalDeleteCustomer";
 export function CustomerList() {
-    const [customer, setCustomer] = useState([]);
+    const [customers, setCustomers] = useState([]);
+    const [idDelete, setIdDelete] = useState();
+    const [nameDelete, setNameDelete] = useState();
     useEffect(() => {
         getAll();
     }, [])
+
     const getAll = async () => {
-        const response = await customerService.getAllCustomer();
-        setCustomer(response);
+        const data = await customerService.getAllCustomer();
+        setCustomers(data);
     }
+
+    const showModal = (id, name) => {
+        setIdDelete(id);
+        setNameDelete(name);
+    }
+
+    if(!customers){
+        return null;
+    }
+
     return (
         <>
             <div className="body container-fluid">
@@ -39,7 +53,7 @@ export function CustomerList() {
                         </thead>
                         <tbody>
                         {
-                            customer.map((customer, index) => (
+                            customers.map((customer, index) => (
                                 <tr key={customer.id}>
                                     <td>{index + 1}</td>
                                     <td>{customer.name}</td>
@@ -52,7 +66,12 @@ export function CustomerList() {
                                     <td>{customer.customerType.name}</td>
                                     <td className="text-center">
                                         <NavLink to={`/customers/update/${customer.id}`} className="btn btn-sm btn-outline-primary me-4 rounded-0">Update</NavLink>
-                                        <button className="btn btn-sm btn-outline-danger rounded-0">Delete</button>
+                                        <button className="btn btn-sm btn-outline-danger rounded-0"
+                                                type="button"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"
+                                                onClick={() => showModal(customer.id, customer.name)}
+                                        >Delete</button>
                                     </td>
                                 </tr>
                             ))
@@ -61,6 +80,11 @@ export function CustomerList() {
                     </table>
                 </div>
             </div>
+            <ModalDeleteCustomer
+                setCustomers={setCustomers}
+                idDelete={idDelete}
+                nameDelete={nameDelete}
+            />
         </>
     )
 }

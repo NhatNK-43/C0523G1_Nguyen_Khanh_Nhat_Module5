@@ -35,9 +35,9 @@ export const updateCustomer = async (values) =>{
     }
 };
 
-export const deleteCustomer = async (values) =>{
+export const deleteCustomer = async (id) =>{
     try {
-        const res = await axios.delete(`${ULR_CUSTOMER}/${values.id}`);
+        const res = await axios.delete(`${ULR_CUSTOMER}/${id}`);
         return res.status;
     } catch (e){
         alert("Error!")
