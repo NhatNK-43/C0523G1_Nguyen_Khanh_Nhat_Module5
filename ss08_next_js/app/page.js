@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-
+import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/js/bootstrap.bundle"
 export default function Home() {
   return (
     <main className={styles.main}>
