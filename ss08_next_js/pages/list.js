@@ -1,12 +1,13 @@
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css"
-// import "bootstrap/dist/js/bootstrap.bundle"
 export default function CovidList({ covidList }) {
     return (
-        <div>
-            <table className="table table-hover">
-                <thead>
+        <div className="container">
+            <h3 className="text-center m-5">VietNam's COVID-19 Information</h3>
+            <table className="table table-hover border">
+                <thead className="table-dark">
                 <tr>
+                    <th>#</th>
                     <th scope="col">Date</th>
                     <th scope="col">Confirmed</th>
                     <th scope="col">Active</th>
@@ -15,9 +16,10 @@ export default function CovidList({ covidList }) {
                 </tr>
                 </thead>
                 <tbody>
-                {covidList.map((covid) => {
+                {covidList.map((covid,index) => {
                     return (
                         <tr key={covid.id}>
+                            <td>{index+1}</td>
                             <td>{covid.date}</td>
                             <td>{covid.confirmed}</td>
                             <td>{covid.active}</td>
