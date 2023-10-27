@@ -1,21 +1,21 @@
 
-import * as customerService from "../../service/customer_service"
+import * as contractService from "../../service/contract_service"
 import {toast} from "react-toastify";
-export function ModalDeleteCustomer({idDelete,nameDelete, setCustomers}){
+export function ModalDeleteContract({idDelete, contractCodeDelete, setContracts}){
     const handleDelete = async () => {
-        let status = await customerService.deleteCustomer(idDelete);
+        let status = await contractService.deleteContract(idDelete);
         if (status===200){
-            toast.success(`Delete ${nameDelete} successfully!`);
-            setCustomers(await customerService.getAllCustomer());
+            toast.success(`Delete contract ${contractCodeDelete} successfully!`);
+            setContracts(await contractService.getAllContract());
         } else {
-            toast.error(`Delete ${nameDelete} failed!`);
+            toast.error(`Delete contract ${contractCodeDelete} failed!`);
         }
     }
     return(
         <>
             <div
                 className="modal fade"
-                id="staticBackdrop"
+                id="deleteContract"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
                 tabIndex={-1}
@@ -26,7 +26,7 @@ export function ModalDeleteCustomer({idDelete,nameDelete, setCustomers}){
                     <div className="modal-content">
                         <div className="modal-header bg-danger">
                             <h1 className="modal-title fs-5 fw-bold text-bg-danger" id="staticBackdropLabel">
-                                Delete Customer
+                                Delete Contract
                             </h1>
                             <button
                                 type="button"
@@ -36,8 +36,8 @@ export function ModalDeleteCustomer({idDelete,nameDelete, setCustomers}){
                             />
                         </div>
                         <div className="modal-body">
-                            <p>Are you sure you want to delete customer <span className="text-danger fw-bold">
-                                {nameDelete}</span></p>
+                            <p>Are you sure you want to delete contract <span className="text-danger fw-bold">
+                                {contractCodeDelete}</span></p>
                             <p className="text-danger">
                                 <span className="text-decoration-underline">Note:</span>
                                 &nbsp; You won't be able to revert this!

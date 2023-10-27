@@ -37,9 +37,9 @@ export function CustomerCreate() {
             <div className="body">
                 <div className="row pt-5 m-0">
                     <div className="col-md-3"/>
-                    <div className="col-md-6">
-                        <div className="form-control p-3 rounded-0">
-                            <div className="mb-3">
+                    <div className="col-md-6 shadow p-0">
+                        <div className="form-control p-5 rounded-0">
+                            <div className="mb-5">
                                 <h2 className="text-primary">Create Customer</h2>
                             </div>
                             <Formik
@@ -49,18 +49,18 @@ export function CustomerCreate() {
                                 }}>
                                 <Form>
                                     <div className="row mb-3">
-                                        <label htmlFor="name" className="form-label col-sm-2">
+                                        <label htmlFor="name" className="form-label col-sm-3">
                                             Name
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <Field type="text" id="name" name="name" className="form-control" required=""/>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
-                                        <label htmlFor="dateOfBirth" className="form-label col-sm-2">
+                                        <label htmlFor="dateOfBirth" className="form-label col-sm-3">
                                             Date of birth
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <Field
                                                 type="date"
                                                 id="dateOfBirth"
@@ -71,10 +71,10 @@ export function CustomerCreate() {
                                         </div>
                                     </div>
                                     <div className="row mb-3">
-                                        <label className="form-label col-sm-2">
+                                        <label className="form-label col-sm-3">
                                             Gender
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <div className="form-check form-check-inline">
                                                 <Field className="form-check-input" type="radio" name="gender"
                                                        id="inlineRadio1"
@@ -88,9 +88,9 @@ export function CustomerCreate() {
                                                 <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
                                             </div>
                                         </div>
-                                        {/*<div className="col-sm-10">*/}
+                                        {/*<div className="col-sm-9">*/}
                                         {/*    <select*/}
-                                        {/*        className="form-select col-sm-10"*/}
+                                        {/*        className="form-select col-sm-9"*/}
                                         {/*        aria-label="Default select example"*/}
                                         {/*        name="area"*/}
                                         {/*        id="gender"*/}
@@ -107,19 +107,19 @@ export function CustomerCreate() {
                                         {/*</div>*/}
                                     </div>
                                     <div className="row mb-3">
-                                        <label htmlFor="idCard" className="form-label col-sm-2">
+                                        <label htmlFor="idCard" className="form-label col-sm-3">
                                             Id card
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <Field type="text" id="idCard" name="idCard" className="form-control"
                                                    required=""/>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
-                                        <label htmlFor="phoneNumber" className="form-label col-sm-2">
+                                        <label htmlFor="phoneNumber" className="form-label col-sm-3">
                                             Phone number
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <Field
                                                 type="text"
                                                 id="phoneNumber"
@@ -130,21 +130,21 @@ export function CustomerCreate() {
                                         </div>
                                     </div>
                                     <div className="row mb-3">
-                                        <label htmlFor="email" className="form-label col-sm-2">
+                                        <label htmlFor="email" className="form-label col-sm-3">
                                             Email
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <Field type="email" id="email" name="email" className="form-control"
                                                    required=""/>
                                         </div>
                                     </div>
                                     {/*<div className="row mb-3">*/}
-                                    {/*    <label htmlFor="customerType" className="form-label col-sm-2">*/}
+                                    {/*    <label htmlFor="customerType" className="form-label col-sm-3">*/}
                                     {/*        Customer type*/}
                                     {/*    </label>*/}
-                                    {/*    <div className="col-sm-10">*/}
+                                    {/*    <div className="col-sm-9">*/}
                                     {/*        <select*/}
-                                    {/*            className="form-select col-sm-10"*/}
+                                    {/*            className="form-select col-sm-9"*/}
                                     {/*            aria-label="Default select example"*/}
                                     {/*            name="area"*/}
                                     {/*            id="customerType"*/}
@@ -162,10 +162,10 @@ export function CustomerCreate() {
                                     {/*    </div>*/}
                                     {/*</div>*/}
                                     <div className="row mb-3">
-                                        <label htmlFor="address" className="form-label col-sm-2">
+                                        <label htmlFor="address" className="form-label col-sm-3">
                                             Address
                                         </label>
-                                        <div className="col-sm-10">
+                                        <div className="col-sm-9">
                                             <Field
                                                 type="text"
                                                 id="address"
@@ -176,8 +176,8 @@ export function CustomerCreate() {
                                         </div>
                                     </div>
                                     <div className="row mb-3">
-                                        <label className="form-label col-sm-2"/>
-                                        <div className="col-sm-10">
+                                        <label className="form-label col-sm-3"/>
+                                        <div className="col-sm-9">
                                             <NavLink
                                                 to="/customers"
                                                 className="btn btn-sm btn-secondary me-4 rounded-0"

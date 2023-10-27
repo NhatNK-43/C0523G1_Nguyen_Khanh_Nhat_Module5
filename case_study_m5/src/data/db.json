@@ -32,7 +32,7 @@
       "email": "sonht@gmail.com",
       "address": "23 Ngô Quyền, TP. Đà Nẵng",
       "customerType": {
-        "id": 3,
+        "id": "3",
         "name": "Gold"
       }
     },
@@ -45,10 +45,7 @@
       "phoneNumber": "0909393939",
       "email": "tuantd@gmail.com",
       "address": "53 Ngô Quyền, TP. Huế, Thừa Thiên Huế",
-      "customerType": {
-        "id": 2,
-        "name": "Sliver"
-      }
+      "customerType": 2
     },
     {
       "id": 3,
@@ -758,8 +755,8 @@
       "contractCode": "HD-0001",
       "startDate": "2020-12-08",
       "endDate": "2020-12-08",
-      "deposit": "0",
-      "totalPayment": 500000
+      "deposit": 500000,
+      "totalPayment": 5000000
     },
     {
       "id": "2",
@@ -782,7 +779,7 @@
       "contractCode": "HD-0004",
       "startDate": "2021-01-14",
       "endDate": "2021-01-18",
-      "deposit": "100000",
+      "deposit": 120000,
       "totalPayment": 2500000
     },
     {
@@ -848,6 +845,14 @@
       "endDate": "2021-05-27",
       "deposit": "0",
       "totalPayment": 1500000
+    },
+    {
+      "contractCode": "HD-0010",
+      "startDate": "2023-10-28",
+      "endDate": "2023-10-29",
+      "deposit": 500000,
+      "totalPayment": 8000000,
+      "id": "nGxCbQH"
     }
   ]
 }

@@ -1,27 +1,44 @@
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import * as contractService from "../../service/contract_service";
 import {toast} from "react-toastify";
 import {Field, Form, Formik} from "formik";
+import {useEffect, useState} from "react";
 
-export default function ContractCreate (){
+export default function ContractUpdate(){
     const navigate = useNavigate();
+    const [contract, setContract] = useState();
+    const {id} = useParams();
 
-    const initValue = {
-        contractCode: "",
-        startDate: "",
-        endDate: "",
-        deposit: "0",
-        totalPayment: "0"
+    useEffect( () => {
+        getContractById();
+    }, [id]);
+
+    const getContractById = async () => {
+        let data = await contractService.getContractById(id);
+        data.deposit = data.deposit +"";
+        data.totalPayment = data.totalPayment +"";
+        setContract(data);
     }
 
-    const create = async (values) => {
-        let status = await contractService.createContract(values);
-        if (status === 201) {
-            toast.success("Create successfully!");
+    if(!contract){
+        return null;
+    }
+
+    const initValue = {
+        ...contract
+    }
+
+    const update = async (values) => {
+        console.log(values)
+        values.deposit = +values.deposit;
+        values.totalPayment = +values.totalPayment;
+        let status = await contractService.updateContract(values);
+        if (status === 200) {
+            toast.success("Update successfully!");
             navigate("/contracts");
         } else {
-            toast.error("Create failed!");
-            navigate("/contract/create");
+            toast.error("Update failed!");
+            navigate(`/contracts/update/${values.id}`);
         }
     }
 
@@ -33,12 +50,12 @@ export default function ContractCreate (){
                     <div className="col-md-6 shadow p-0">
                         <div className="form-control p-5 rounded-0">
                             <div className="mb-5">
-                                <h2 className="text-primary">Create Contract</h2>
+                                <h2 className="text-primary">Update Contract</h2>
                             </div>
                             <Formik
                                 initialValues={initValue}
                                 onSubmit={values => {
-                                    create(values);
+                                    update(values);
                                 }}>
                                 <Form>
                                     <div className="row mb-3">

@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL_FACILITY = "http://localhost:8080/facilitys";
+const URL_FACILITY = "http://localhost:8080/facilities";
 export const getAllFacility = async () => {
     try {
         let res = await axios.get(URL_FACILITY);
