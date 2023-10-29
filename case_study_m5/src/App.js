@@ -12,13 +12,16 @@ import {CustomerUpdate} from "./components/customers/CustomerUpdate";
 import {Modal} from "./components/customers/Modal";
 import ContractCreate from "./components/contracts/ContractCreate";
 import ContractUpdate from "./components/contracts/ContractUpdate";
+import Footer from "./components/Footer";
+import {FacilityCreate} from "./components/facilities/FacilityCreate";
+import {FacilityUpdate} from "./components/facilities/FacilityUpdate";
 
 function App() {
     return (
         <>
             <Header/>
             <Routes>
-                <Route path="/" element={<CustomerList/>}/>
+                <Route path="/" element={<FacilityList/>}/>
                 <Route path="/customers" element={<CustomerList/>}/>
                 <Route path="/contracts" element={<ContractList/>}/>
                 <Route path="/facilities" element={<FacilityList/>}/>
@@ -26,9 +29,12 @@ function App() {
                 <Route path="/customers/update/:id" element={<CustomerUpdate/>}/>
                 <Route path="/contracts/create" element={<ContractCreate/>}/>
                 <Route path="/contracts/update/:id" element={<ContractUpdate/>}/>
+                <Route path="/facilities/create" element={<FacilityCreate/>}/>
+                <Route path="/facilities/update/:id" element={<FacilityUpdate/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
-            <Modal/>
+            {/*<Modal/>*/}
+            <Footer/>
             <ToastContainer></ToastContainer>
         </>
     )

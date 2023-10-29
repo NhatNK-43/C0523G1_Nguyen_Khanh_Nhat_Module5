@@ -1,14 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
+import {NavLink} from "react-router-dom";
+import data from "bootstrap/js/src/dom/data";
 
 function Header() {
+    const [isDark,setIsDark] = useState("");
+
+    function myFunction() {
+        let element = document.body;
+        // element.classList.toggle("dark-mode");
+        // element.classList.add('data-bs-theme="dark"');
+        element.setAttribute("data-bs-theme","dark")
+    }
     return (
         <>
             <div className="header fixed-top">
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
-                        <a className="navbar-brand" href="#">
+                        <NavLink className="navbar-brand" to="/">
                             <img src="/images/logo-furama.png" style={{height:"70px"}} alt="..."/>
-                        </a>
+                        </NavLink>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes"/>
+                                <label className="form-check-label" htmlFor="mySwitch">Dark Mode</label>
+                        </div>
                         <button
                             className="navbar-toggler"
                             type="button"
@@ -26,19 +40,19 @@ function Header() {
                         >
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">
+                                    <NavLink id="path" className="nav-link" to="/facilities">
                                         Facilities
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">
+                                    <NavLink id="path" className="nav-link" to="/customers">
                                         Customers
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">
-                                        Contacts
-                                    </a>
+                                    <NavLink id="path" className="nav-link" to="/contracts">
+                                        Contracts
+                                    </NavLink>
                                 </li>
                             </ul>
                         </div>

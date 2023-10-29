@@ -4,6 +4,7 @@ import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
+import * as Yup from "yup"
 
 export function CustomerUpdate() {
     const navigate = useNavigate();
@@ -38,24 +39,35 @@ export function CustomerUpdate() {
     }
 
     const initValue = {
-
-        // name: customer.name,
-        //
-        // customerType: customer.customerType.id,
-        // ...customer
-        address: customer.address,
-        customerType: customer.customerType.id,
-        dateOfBirth: customer.dateOfBirth,
-        email: customer.email,
-        gender: customer.gender,
-        idCard: customer.idCard,
-        name: customer.name,
-        phoneNumber: customer.phoneNumber,
-        id: customer.id
+        ...customer,
+        customerType: JSON.stringify(customer.customerType)
     };
 
+    const d = new Date();
+    const date = (d.getFullYear() - 18) + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+    const validateObject = {
+        name: Yup.string()
+            .required("Please enter your full name"),
+        idCard: Yup.string()
+            .required("Please enter your ID card")
+            .matches(/^[0-9]{12}$|^[0-9]{9}$/, "The ID card entered is invalid"),
+        dateOfBirth: Yup.date()
+            .required("Please enter your date of birth")
+            .min("1900-01-01", "Year of birth cannot be less than 1990")
+            .max(date, "Your age must be greater than 18"),
+        phoneNumber: Yup.string()
+            .required("Please enter your phone number")
+            .matches(/^0[0-9]{9}$/, "The phone number entered is invalid"),
+        email: Yup.string()
+            .required("Please enter your email")
+            .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, "The email entered is invalid"),
+        address: Yup.string()
+            .required("Please enter your address")
+    }
+
     const update = async (values) => {
-        // values.customerType = +values.customerType;
+        values.customerType = JSON.parse(values.customerType);
         values.gender = +values.gender;
         let status = await customerService.updateCustomer(values);
         if (status === 200) {
@@ -81,7 +93,10 @@ export function CustomerUpdate() {
                                 initialValues={initValue}
                                 onSubmit={values => {
                                     update(values);
-                                }}>
+
+                                }}
+                                validationSchema={Yup.object(validateObject)}
+                            >
                                 <Form>
                                     <div className="row mb-3">
                                         <label htmlFor="name" className="form-label col-sm-3">
@@ -89,7 +104,9 @@ export function CustomerUpdate() {
                                         </label>
                                         <div className="col-sm-9">
                                             <Field type="text" id="name" name="name" className="form-control"
-                                                   required=""/>
+                                                   />
+                                            <ErrorMessage name="name" component="div" className="mt-2 form-text text-danger"
+                                                          ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -102,9 +119,12 @@ export function CustomerUpdate() {
                                                 id="dateOfBirth"
                                                 name="dateOfBirth"
                                                 className="form-control"
-                                                required=""
+                                                
                                             />
+                                            <ErrorMessage name="dateOfBirth" component="div" className="mt-2 form-text text-danger"
+                                                          ></ErrorMessage>
                                         </div>
+
                                     </div>
                                     <div className="row mb-3">
                                         <label className="form-label col-sm-3">
@@ -132,7 +152,9 @@ export function CustomerUpdate() {
                                         </label>
                                         <div className="col-sm-9">
                                             <Field type="text" id="idCard" name="idCard" className="form-control"
-                                                   required=""/>
+                                                   />
+                                            <ErrorMessage name="idCard" component="div" className="mt-2 form-text text-danger"
+                                                          ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -145,8 +167,10 @@ export function CustomerUpdate() {
                                                 id="phoneNumber"
                                                 name="phoneNumber"
                                                 className="form-control"
-                                                required=""
+                                                
                                             />
+                                            <ErrorMessage name="phoneNumber" component="div" className="mt-2 form-text text-danger"
+                                                          ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -155,7 +179,9 @@ export function CustomerUpdate() {
                                         </label>
                                         <div className="col-sm-9">
                                             <Field type="email" id="email" name="email" className="form-control"
-                                                   required=""/>
+                                                   />
+                                            <ErrorMessage name="email" component="div" className="mt-2 form-text text-danger"
+                                                          ></ErrorMessage>
                                         </div>
                                     </div>
 
@@ -169,26 +195,28 @@ export function CustomerUpdate() {
                                                 id="address"
                                                 name="address"
                                                 className="form-control"
-                                                required=""
+                                                
                                             />
+                                            <ErrorMessage name="address" component="div" className="mt-2 form-text text-danger"
+                                                          ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
-                                        <label htmlFor="customerType" className="form-label col-sm-3">
+                                        <label className="form-label col-sm-3" htmlFor="customerType">
                                             Customer type
                                         </label>
                                         <div className="col-sm-9">
-                                            <Field
-                                                className="form-select"
-                                                aria-label="Default select example"
-                                                name="customerType"
-                                                id="customerType"
-                                                required=""
+                                            <Field as="select"
+                                                   className="form-select"
+                                                   aria-label="Default select example"
+                                                   name="customerType"
+                                                   id="customerType"
                                             >
                                                 {
                                                     customerTypes.map((customerType) => (
-                                                        <option value={customerType.id}
-                                                                key={customerType.id}>
+                                                        <option
+                                                            value={JSON.stringify(customerType)}
+                                                            key={customerType.id}>
                                                             {customerType.name}</option>
                                                     ))
                                                 }

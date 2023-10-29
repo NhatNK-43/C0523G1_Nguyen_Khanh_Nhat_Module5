@@ -30,8 +30,15 @@ body{
   padding: 0 20px;
 }
 
-.header .nav-link:hover{
+.header #path:hover{
   transform: scale(1.1);
+  text-decoration-line: underline;
+  color: #0d6efd;
+}
+
+.navbar-nav #path.active{
+  transform: scale(1.1);
+  color: red;
   text-decoration-line: underline;
 }
 
@@ -40,4 +47,23 @@ body{
 }
 .body {
   margin-top: 96px;
+  min-height: 648px;
+}
+
+#fix-tbody{
+  min-height: 527px;
+}
+
+.footer{
+  margin-top: 26px;
+  background-color: #a0d8ee;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 const URL_CONTRACT = "http://localhost:8080/contracts"
-export const getAllContract = async () =>{
+export const getAllContract = async (contractCodeSearch) => {
     try {
-        const res = await axios.get(URL_CONTRACT);
+        const res = await axios.get(URL_CONTRACT+`?contractCode_like=${contractCodeSearch}`);
         return res.data;
     } catch (e){
         alert("Error!")

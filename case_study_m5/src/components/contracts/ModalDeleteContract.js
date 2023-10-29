@@ -6,7 +6,7 @@ export function ModalDeleteContract({idDelete, contractCodeDelete, setContracts}
         let status = await contractService.deleteContract(idDelete);
         if (status===200){
             toast.success(`Delete contract ${contractCodeDelete} successfully!`);
-            setContracts(await contractService.getAllContract());
+            setContracts(await contractService.getAllContract(""));
         } else {
             toast.error(`Delete contract ${contractCodeDelete} failed!`);
         }

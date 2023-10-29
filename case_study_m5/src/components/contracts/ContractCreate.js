@@ -1,10 +1,15 @@
 import {NavLink, useNavigate} from "react-router-dom";
 import * as contractService from "../../service/contract_service";
 import {toast} from "react-toastify";
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import * as Yup from "yup";
+import {useState} from "react";
+import * as events from "events";
 
 export default function ContractCreate (){
     const navigate = useNavigate();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
     const initValue = {
         contractCode: "",
@@ -14,6 +19,28 @@ export default function ContractCreate (){
         totalPayment: "0"
     }
 
+    const d = new Date();
+    const date = (d.getFullYear()) + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    // if (!startDate&&!endDate){
+    // }
+
+    const validateObject = {
+        contractCode: Yup.string()
+            .required("Please enter your full name")
+            .matches(/^HD-[0-9]{4}$/,"The contract code entered is invalid"),
+        startDate: Yup.date()
+            .required("Please enter start date")
+            .min(date, "The start date cannot be less than the current date"),
+            // .max(Yup.ref("endDate"), "The start date cannot be less than the end date"),
+        endDate: Yup.date()
+            .required("Please enter end date")
+            .min(Yup.ref("startDate"), "The end date cannot be less than the start date"),
+        deposit: Yup.number()
+            .min(0, "The deposit must be greater than or equal to 0"),
+        totalPayment: Yup.number()
+            .required("Please enter total payment")
+            .min(0, "The total payment must be greater than or equal to 0")
+    }
     const create = async (values) => {
         let status = await contractService.createContract(values);
         if (status === 201) {
@@ -39,14 +66,18 @@ export default function ContractCreate (){
                                 initialValues={initValue}
                                 onSubmit={values => {
                                     create(values);
-                                }}>
+                                }}
+                                validationSchema={Yup.object(validateObject)}
+                            >
                                 <Form>
                                     <div className="row mb-3">
                                         <label htmlFor="contractCode" className="form-label col-sm-3">
                                             Contract code
                                         </label>
                                         <div className="col-sm-9">
-                                            <Field type="text" id="contractCode" name="contractCode" className="form-control" required=""/>
+                                            <Field type="text" id="contractCode" name="contractCode" className="form-control"/>
+                                            <ErrorMessage name="contractCode" component="div" className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -59,8 +90,9 @@ export default function ContractCreate (){
                                                 id="startDate"
                                                 name="startDate"
                                                 className="form-control"
-                                                required=""
                                             />
+                                            <ErrorMessage name="startDate" component="div" className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -73,8 +105,10 @@ export default function ContractCreate (){
                                                 id="endDate"
                                                 name="endDate"
                                                 className="form-control"
-                                                required=""
+                                                
                                             />
+                                            <ErrorMessage name="endDate" component="div" className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
                                         </div>
                                     </div>
 
@@ -88,8 +122,9 @@ export default function ContractCreate (){
                                                 id="deposit"
                                                 name="deposit"
                                                 className="form-control"
-                                                required=""
                                             />
+                                            <ErrorMessage name="deposit" component="div" className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -102,8 +137,9 @@ export default function ContractCreate (){
                                                 id="totalPayment"
                                                 name="totalPayment"
                                                 className="form-control"
-                                                required=""
                                             />
+                                            <ErrorMessage name="totalPayment" component="div" className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">

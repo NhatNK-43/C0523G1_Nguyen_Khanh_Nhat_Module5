@@ -7,12 +7,16 @@ export function ContractList() {
     const [contracts, setContracts] = useState([]);
     const [idDelete, setIdDelete] = useState();
     const [contractCodeDelete, setContractCodeDelete] = useState();
-    useEffect(()=>{
+    const [contractCodeSearch, setContractCodeSearch] = useState("");
+    console.log(43+contractCodeSearch);
+
+    useEffect(() => {
         getAll();
-    },[])
+    }, [contractCodeSearch])
+
 
     const getAll = async () => {
-        const data = await contractService.getAllContract();
+        const data = await contractService.getAllContract(contractCodeSearch);
         setContracts(data);
     }
 
@@ -24,13 +28,16 @@ export function ContractList() {
     return (
         <>
             <div className="body container shadow pb-1">
-                <div>
+                <div className="d-flex pt-3 mb-3 ">
                     <NavLink
                         to="/contracts/create"
-                        className="btn btn-sm btn-primary mt-3 mb-3 rounded-0"
+                        className="btn btn-sm btn-primary rounded-0 me-3"
                     >
                         Create contract
                     </NavLink>
+                    <input className="form-control-sm rounded-0 border-1 w-25" placeholder="Search contract code..."
+                           name="contractCodeSearch"
+                           onChange={(event) => setContractCodeSearch(event.target.value)}/>
                 </div>
                 <div>
                     <table className="table table-hover border">
@@ -47,9 +54,9 @@ export function ContractList() {
                         </thead>
                         <tbody>
                         {
-                            contracts.map((contract,index)=>(
+                            contracts.length !== 0 ? contracts.map((contract, index) => (
                                 <tr key={contract.id}>
-                                    <td>{index+1}</td>
+                                    <td>{index + 1}</td>
                                     <td>{contract.contractCode}</td>
                                     <td>{contract.startDate}</td>
                                     <td>{contract.endDate}</td>
@@ -67,7 +74,9 @@ export function ContractList() {
                                         </button>
                                     </td>
                                 </tr>
-                            ))
+                            )) : <tr>
+                                <td colSpan="7" className="text-danger">Not found name: <b>{contractCodeSearch}</b>!</td>
+                            </tr>
                         }
                         </tbody>
                     </table>

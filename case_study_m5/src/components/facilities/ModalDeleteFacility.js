@@ -1,21 +1,20 @@
-
-import * as customerService from "../../service/customer_service"
+import * as facilityService from "../../service/facility_service"
 import {toast} from "react-toastify";
-export function ModalDeleteCustomer({idDelete,nameDelete, setCustomers}){
+export function ModalDeleteFacility({idDelete, nameDelete, setFacilities}){
     const handleDelete = async () => {
-        let status = await customerService.deleteCustomer(idDelete);
+        let status = await facilityService.deleteFacility(idDelete);
         if (status===200){
-            toast.success(`Delete ${nameDelete} successfully!`);
-            setCustomers(await customerService.getAllCustomer("",""));
+            toast.success(`Delete facility ${nameDelete} successfully!`);
+            setFacilities(await facilityService.getAllFacility());
         } else {
-            toast.error(`Delete ${nameDelete} failed!`);
+            toast.error(`Delete contract ${nameDelete} failed!`);
         }
     }
     return(
         <>
             <div
                 className="modal fade"
-                id="staticBackdrop"
+                id="deleteContract"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
                 tabIndex={-1}
@@ -26,7 +25,7 @@ export function ModalDeleteCustomer({idDelete,nameDelete, setCustomers}){
                     <div className="modal-content">
                         <div className="modal-header bg-danger">
                             <h1 className="modal-title fs-5 fw-bold text-bg-danger" id="staticBackdropLabel">
-                                Delete Customer
+                                Delete Facility
                             </h1>
                             <button
                                 type="button"
@@ -36,7 +35,7 @@ export function ModalDeleteCustomer({idDelete,nameDelete, setCustomers}){
                             />
                         </div>
                         <div className="modal-body">
-                            <p>Are you sure you want to delete customer <span className="text-danger fw-bold">
+                            <p>Are you sure you want to delete facility <span className="text-danger fw-bold">
                                 {nameDelete}</span></p>
                             <p className="text-danger">
                                 <span className="text-decoration-underline">Note:</span>

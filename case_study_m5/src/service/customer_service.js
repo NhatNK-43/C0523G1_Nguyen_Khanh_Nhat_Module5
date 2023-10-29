@@ -1,15 +1,32 @@
 import axios from "axios";
 const ULR_CUSTOMER = "http://localhost:8080/customers";
-export const getAllCustomer = async () =>{
+// export const getAllCustomer = async () =>{
+//     try {
+//         const res = await axios.get(ULR_CUSTOMER);
+//         return res.data;
+//     } catch (e){
+//         alert("Error!")
+//     }
+// }
+
+export const getAllCustomer = async (name, address) =>{
     try {
-        const res = await axios.get(ULR_CUSTOMER);
+        const res = await axios.get(ULR_CUSTOMER+`?name_like=${name}&address_like=${address}`);
         return res.data;
     } catch (e){
         alert("Error!")
     }
 }
 
-export const createCustomer = async (values) =>{
+export const pageCustomer = async (name, address, page, number)=>{
+    try {
+        return  await axios.get(ULR_CUSTOMER+`?name_like=${name}&address_like=${address}&_page=${page}&_limit=${number}`);
+
+    } catch (e){
+        alert("Error!")
+    }
+}
+export const createCustomer = async (values) => {
     try {
         const res = await axios.post(ULR_CUSTOMER, values);
         return res.status;
