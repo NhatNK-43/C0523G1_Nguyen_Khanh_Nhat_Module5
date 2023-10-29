@@ -10,9 +10,9 @@ import {useEffect, useState} from "react";
 export function FacilityUpdate() {
     const navigate = useNavigate();
     const [facilityTypes, setFacilityTypes] = useState([]);
+    const [facility, setFacility] = useState();
     const [facilityTypeId, setFacilityTypeId] = useState(1);
     const [accompaniedServices, setAccompaniedServices] = useState([]);
-
     const {id} = useParams();
 
     useEffect(() => {
@@ -20,6 +20,9 @@ export function FacilityUpdate() {
         getAllAccompaniedService();
     }, []);
 
+    useEffect(()=>{
+        getFacilityById();
+    },[id])
     const getAllFacilityType = async () => {
         let data = await facilityTypeService.getAllFacilityType();
         setFacilityTypes(data);
@@ -30,27 +33,18 @@ export function FacilityUpdate() {
         setAccompaniedServices(data);
     }
 
-    if (!facilityTypes || !accompaniedServices) {
+    const getFacilityById = async ()=>{
+        let data = await facilityService.getFacilityById(id);
+        setFacility(data);
+    }
+
+    if (!facilityTypes || !accompaniedServices||!facility) {
         return null;
     }
 
     const initValue = {
-        name: "",
-        area: "",
-        rentalCosts: "",
-        capacity: "",
-        rentalType: "",
-        pathImage: "",
-        freeService: [],
-        roomStandards: "",
-        poolArea: "",
-        numberFloor: "",
-        otherUtilities: "",
-        accompaniedService: {},
-        facilityType: {
-            id: 1,
-            name: "Villa"
-        }
+        ...facility,
+        facilityType: JSON.stringify(facility.facilityType)
     }
 
     // const d = new Date();
