@@ -7,10 +7,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ICustomerService {
-    List<Customer> getAll();
-    Page<Customer> getAllByNameContainingAndCustomerTypeId(Pageable pageable,Integer number, String name, Integer id);
-    List<Customer> getAllByNameContainingAndCustomerTypeId(String name, Integer id);
-    List<Customer> getAllByNameContaining(String name);
+//    List<Customer> getAll();
+//
+//    List<Customer> getAllByNameContainingAndCustomerTypeId(String name, Integer id);
+//    List<Customer> getAllByNameContaining(String name);
+    Page<Customer> getAllByNameContainingAndCustomerTypeId(Pageable pageable, String name, Integer id);
+    Page<Customer> getAllByNameContaining(Pageable pageable, String name);
+    Page<Customer> getAll(Pageable pageable);
     boolean save(Customer customer);
 
     boolean delete(Integer id);

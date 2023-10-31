@@ -13,24 +13,36 @@ import java.util.List;
 public class CustomerService implements ICustomerService{
     @Autowired
     private ICustomerRepository customerRepository;
+//    @Override
+//    public List<Customer> getAll() {
+//        return customerRepository.findAll();
+//    }
+//
+//
+//    @Override
+//    public List<Customer> getAllByNameContainingAndCustomerTypeId(String name, Integer id) {
+//        return customerRepository.findAllByNameContainingAndCustomerTypeId(name,id);
+//    }
+//
+//    @Override
+//    public List<Customer> getAllByNameContaining(String name) {
+//        return customerRepository.findAllByNameContaining(name);
+//    }
+
     @Override
-    public List<Customer> getAll() {
-        return customerRepository.findAll();
+    public Page<Customer> getAllByNameContainingAndCustomerTypeId(Pageable pageable, String name, Integer id) {
+        return customerRepository.findAllByNameContainingAndCustomerTypeId(pageable, name, id);
     }
 
     @Override
-    public Page<Customer> getAllByNameContainingAndCustomerTypeId(Pageable pageable,Integer number, String name, Integer id) {
-        return customerRepository.findAllByNameContainingAndCustomerTypeId(pageable, number, name, id);
+    public Page<Customer> getAllByNameContaining(Pageable pageable, String name) {
+        return customerRepository.findAllByNameContaining(pageable, name);
     }
 
     @Override
-    public List<Customer> getAllByNameContainingAndCustomerTypeId(String name, Integer id) {
-        return customerRepository.findAllByNameContainingAndCustomerTypeId(name,id);
-    }
-
-    @Override
-    public List<Customer> getAllByNameContaining(String name) {
-        return customerRepository.findAllByNameContaining(name);
+    public Page<Customer> getAll(Pageable pageable) {
+//        return customerRepository.findAll(pageable);
+        return customerRepository.findAll(pageable);
     }
 
 

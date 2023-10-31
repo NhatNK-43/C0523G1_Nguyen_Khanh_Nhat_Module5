@@ -31,30 +31,28 @@ public class CustomerController {
         }
         return new ResponseEntity<>(customerTypeList, HttpStatus.OK);
     }
-    @GetMapping("")
-    public ResponseEntity<List<Customer>> getList(@RequestParam(name = "nameSearch", required = false) String name,
-                                                  @RequestParam(name = "customerTypeId", required = false) Integer id) {
-        if(name==null&&id==null){
-            List<Customer> customerList = customerService.getAll();
-            return new ResponseEntity<>(customerList, HttpStatus.OK);
-        }
-        else if(id==null){
-            List<Customer> customerList = customerService.getAllByNameContaining(name);
-            return new ResponseEntity<>(customerList, HttpStatus.OK);
-        } else {
-            List<Customer> customerList = customerService.getAllByNameContainingAndCustomerTypeId(name,id);
-            return new ResponseEntity<>(customerList, HttpStatus.OK);
-        }
-    }
-//
+
+//    @GetMapping("")
+//    public ResponseEntity<List<Customer>> getList(@RequestParam(name = "nameSearch", required = false) String name,
+//                                                  @RequestParam(name = "customerTypeId", required = false) Integer id) {
+//        if(name==null&&id==null){
+//            List<Customer> customerList = customerService.getAll();
+//            return new ResponseEntity<>(customerList, HttpStatus.OK);
+//        }
+//        else if(id==null){
+//            List<Customer> customerList = customerService.getAllByNameContaining(name);
+//            return new ResponseEntity<>(customerList, HttpStatus.OK);
+//        } else {
+//            List<Customer> customerList = customerService.getAllByNameContainingAndCustomerTypeId(name,id);
+//            return new ResponseEntity<>(customerList, HttpStatus.OK);
+//        }
+//    }
+
 //    @GetMapping("")
 //    public ResponseEntity<Page<Customer>> getList(
-//            @RequestParam(name = "page", defaultValue = "0", required = false) Integer page,
-//            @RequestParam(name = "number", defaultValue = "10", required = false) Integer number,
-//            @RequestParam(name = "nameSearch", defaultValue = "", required = false) String name,
-//            @RequestParam(name = "customerTypeId", defaultValue = "0", required = false) Integer id)
-//             {
-//        Pageable pageable = PageRequest.of(page, number);
+//            @RequestParam(name = "page", defaultValue = "0",required = false) Integer page,
+//            @RequestParam(name = "nameSearch", required = false) String name)
+//    {
 ////        if (name == null && id == null) {
 ////            List<Customer> customerList = customerService.getAll();
 ////            return new ResponseEntity<>(customerList, HttpStatus.OK);
@@ -65,9 +63,36 @@ public class CustomerController {
 ////            List<Customer> customerList = customerService.getAllByNameContainingAndCustomerTypeId(name, id);
 ////            return new ResponseEntity<>(customerList, HttpStatus.OK);
 ////        }
-//        Page<Customer> customerPage = customerService.getAllByNameContainingAndCustomerTypeId(pageable, number,name, id);
-//        return new ResponseEntity<>(customerPage, HttpStatus.OK);
+//        Pageable pageable = PageRequest.of(page,10);
+//        if (name == null){
+//            Page<Customer> customerPage = customerService.getAll(pageable);
+//            return new ResponseEntity<>(customerPage, HttpStatus.OK);
+//        } else {
+//            Page<Customer> customerPage = customerService.getAllByNameContaining(pageable, name);
+//            return new ResponseEntity<>(customerPage, HttpStatus.OK);
+//        }
+//
+//
 //    }
+
+    @GetMapping("")
+    public ResponseEntity<Page<Customer>> getList(
+            @RequestParam(name = "page", defaultValue = "0", required = false) Integer page,
+//            @RequestParam(name = "number", defaultValue = "10", required = false) Integer number,
+            @RequestParam(name = "nameSearch", required = false) String name,
+            @RequestParam(name = "customerTypeId", required = false) Integer id) {
+        Pageable pageable = PageRequest.of(page, 10);
+        if (name == null && id == null) {
+            Page<Customer> customerPage = customerService.getAll(pageable);
+            return new ResponseEntity<>(customerPage, HttpStatus.OK);
+        } else if (id == null) {
+            Page<Customer> customerPage = customerService.getAllByNameContaining(pageable, name);
+            return new ResponseEntity<>(customerPage, HttpStatus.OK);
+        } else {
+            Page<Customer> customerPage = customerService.getAllByNameContainingAndCustomerTypeId(pageable, name, id);
+            return new ResponseEntity<>(customerPage, HttpStatus.OK);
+        }
+    }
 
 
     @GetMapping("/{id}")
