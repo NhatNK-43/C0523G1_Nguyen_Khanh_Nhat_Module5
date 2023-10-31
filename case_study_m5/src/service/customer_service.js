@@ -23,14 +23,20 @@ export const getAllCustomer = async (name, id) => {
 //     }
 // }
 
-// export const pageCustomer = async (name, address, page, number)=>{
-//     try {
-//         return  await axios.get(ULR_CUSTOMER+`?name_like=${name}&address_like=${address}&_page=${page}&_limit=${number}`);
-//
-//     } catch (e){
-//         alert("Error!")
-//     }
-// }
+export const pageCustomer = async (page, name, id)=>{
+    try {
+        let path = ULR_CUSTOMER+
+            (name === "" && id === 0 ? `?page=${page}`
+                : id === 0 ? `?page=${page}&nameSearch=${name}`
+                    : `?page=${page}&nameSearch=${name}&customerTypeId=${id}`)
+        const res = await axios.get(path);
+        console.log(path);
+        return res;
+
+    } catch (e){
+        alert("Error!")
+    }
+}
 export const createCustomer = async (values) => {
     try {
         const res = await axios.post(ULR_CUSTOMER, values);

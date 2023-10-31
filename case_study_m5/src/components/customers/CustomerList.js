@@ -3,7 +3,6 @@ import * as customerService from "../../service/customer_service";
 import * as customerTypeService from "../../service/customer_type_service";
 import {Link, NavLink} from "react-router-dom";
 import {ModalDeleteCustomer} from "./ModalDeleteCustomer";
-import SweetAlert2 from "react-sweetalert2";
 
 export function CustomerList() {
     const [customers, setCustomers] = useState([]);
@@ -14,35 +13,22 @@ export function CustomerList() {
     const [customerTypes, setCustomerTypes] = useState([]);
     const [number, setNumber] = useState(10);
     const [totalPage, setTotalPage] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [swalProps, setSwalProps] = useState({});
 
-    //
-    // useEffect(() => {
-    //     getAll();
-    // }, [nameSearch, addressSearch, page, number])
-    //
-    //
-    // const getAll = async () => {
-    //     const res = await customerService.pageCustomer(nameSearch, addressSearch, page, number);
-    //     const totalP = totalPageArray(Math.ceil(res.headers["x-total-count"]/number));
-    //     setTotalPage(totalP);
-    //     setCustomers(res.data);
-    // }
-
-    console.log(customerTypeId)
 
     useEffect(() => {
         getAll();
         getAllCustomerType();
-    }, [nameSearch, customerTypeId])
+    }, [nameSearch, customerTypeId, page])
 
 
     const getAll = async () => {
-        const data = await customerService.getAllCustomer(nameSearch, customerTypeId.id);
-        // const totalP = totalPageArray(Math.ceil(res.headers["x-total-count"]/number));
-        // setTotalPage(totalP);
-        setCustomers(data);
+        const res = await customerService.pageCustomer(page, nameSearch, customerTypeId.id);
+        const totalP = totalPageArray(res.data.totalPages);
+        console.log(totalP);
+        setTotalPage(totalP);
+        setCustomers(res.data.content);
     }
 
     const getAllCustomerType = async () => {
@@ -50,39 +36,22 @@ export function CustomerList() {
         setCustomerTypes(data);
     }
 
-    const handleCustomerType = (event) => {
-
+    const totalPageArray = (totalP) => {
+        const arr = [];
+        for (let i = 0; i < totalP; i++) {
+            arr[i] = i + 1;
+        }
+        return arr;
     }
-
-    // const totalPageArray = (totalP) => {
-    //     const arr = [];
-    //     for (let i = 0; i < totalP; i++) {
-    //         arr[i] = i + 1;
-    //     }
-    //     return arr;
-    // }
 
     const showModal = (id, name) => {
         setIdDelete(id);
         setNameDelete(name);
     }
 
-    if (!customers || !customerTypes) {
+    if (!customers || !customerTypes||!totalPage) {
         return null;
     }
-    console.log(customerTypeId.id)
-    // const handleClick = ()=> {
-    //     setSwalProps({
-    //         show: true,
-    //         icon: "success",
-    //         title: 'Example',
-    //         text: 'Hello World',
-    //     })
-    // }
-    // if(!totalPage){
-    //     return null;
-    // }
-
     return (
         <>
             <div className="body">
@@ -94,14 +63,13 @@ export function CustomerList() {
                         >
                             Create customer
                         </NavLink>
-                        <input className="form-control-sm rounded-0 border w-25 ms-3" placeholder="Search name..."
+                        <input className="form-control-sm rounded-0 border-1 w-25 ms-3" placeholder="Search name..."
                                name="nameSearch"
                                onChange={(event) => setNameSearch(event.target.value)}/>
 
                         <select
-                            className="form-select border-1 rounded-0 2 w-25"
+                            className="form-select-sm border-1 rounded-0"
                             aria-label="Default select example"
-                            // as="select"
                             name="customerTypeId"
                             onChange={(event)=> setCustomerTypeId(JSON.parse(event.target.value))}
                         >
@@ -115,11 +83,6 @@ export function CustomerList() {
                                 ))
                             }
                         </select>
-
-
-                        {/*<input className="form-control-sm rounded-0 border-1 w-25 ms-3" placeholder="Search address..."*/}
-                        {/*       name="customerTypeIdSearch"*/}
-                        {/*       onChange={(event) => handleCustomerType(event.target.value)}/>*/}
                     </div>
                     <div id="fix-tbody">
                         <table className="table table-hover border mb-0">
@@ -160,7 +123,7 @@ export function CustomerList() {
                                         </tr>
                                     ))
                                     : <tr>
-                                        <td colSpan="7" className="text-danger">
+                                        <td colSpan="7" className="text-danger text-center">
                                             Not found customer
                                             {
                                                 nameSearch !== "" && <span> named: <b>{nameSearch}</b></span>
@@ -178,43 +141,43 @@ export function CustomerList() {
                             </tbody>
                         </table>
                     </div>
-                    {/*<div className="mt-3">*/}
-                    {/*    <nav aria-label="Page navigation example">*/}
-                    {/*        <ul className="pagination justify-content-end">*/}
-                    {/*            <li className="page-item">*/}
-                    {/*                <button className={`page-link rounded-0 ${page<=1?"disabled":""}`} aria-label="Previous" onClick={()=>setPage(1)}>*/}
-                    {/*                    <small aria-hidden="true">&lt;&lt;</small>*/}
-                    {/*                </button>*/}
-                    {/*            </li>*/}
-                    {/*            <li className="page-item">*/}
-                    {/*                <button className={`page-link rounded-0 ${page<=1?"disabled":""}`} onClick={()=>setPage(page-1)}  aria-label="Previous">*/}
-                    {/*                    <span aria-hidden="true">&lt;</span>*/}
-                    {/*                </button>*/}
-                    {/*            </li>*/}
-                    {/*            {*/}
-                    {/*                totalPage.map(index =>{*/}
-                    {/*                    return(*/}
-                    {/*                        <li className="page-item" key={index}>*/}
-                    {/*                            <button className={`page-link ${page===index?"active":""}`} id="page-number" onClick={()=>setPage(index)}>{index}</button>*/}
-                    {/*                        </li>*/}
-                    {/*                    )*/}
-                    {/*                })*/}
-                    {/*            }*/}
+                    <div className="mt-3">
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination justify-content-end">
+                                <li className="page-item">
+                                    <button className={`page-link rounded-0 ${page<=0?"disabled":""}`} aria-label="Previous" onClick={()=>setPage(0)}>
+                                        <small aria-hidden="true">&lt;&lt;</small>
+                                    </button>
+                                </li>
+                                <li className="page-item">
+                                    <button className={`page-link rounded-0 ${page<=0?"disabled":""}`} onClick={()=>setPage(page-1)}  aria-label="Previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                    </button>
+                                </li>
+                                {
+                                    totalPage.map((item,index) =>{
+                                        return(
+                                            <li className="page-item" key={index}>
+                                                <button className={`page-link ${page===index?"active":""}`} id="page-number" onClick={()=>setPage(index)}>{index+1}</button>
+                                            </li>
+                                        )
+                                    })
+                                }
 
-                    {/*            <li className="page-item">*/}
-                    {/*                <button className={`page-link rounded-0 ${page>=totalPage[totalPage.length-1]?"disabled":""}`} onClick={()=>setPage(page+1)} aria-label="Next">*/}
-                    {/*                    <small aria-hidden="true">&gt;</small>*/}
-                    {/*                </button>*/}
-                    {/*            </li>*/}
-                    {/*            <li className="page-item">*/}
-                    {/*                <button className={`page-link rounded-0 ${page>=totalPage[totalPage.length-1]?"disabled":""}`}*/}
-                    {/*                        onClick={()=> setPage(totalPage[totalPage.length-1])} aria-label="Next">*/}
-                    {/*                    <small aria-hidden="true">&gt;&gt;</small>*/}
-                    {/*                </button>*/}
-                    {/*            </li>*/}
-                    {/*        </ul>*/}
-                    {/*    </nav>*/}
-                    {/*</div>*/}
+                                <li className="page-item">
+                                    <button className={`page-link rounded-0 ${page+1>=totalPage[totalPage.length-1]?"disabled":""}`} onClick={()=>setPage(page+1)} aria-label="Next">
+                                        <small aria-hidden="true">&gt;</small>
+                                    </button>
+                                </li>
+                                <li className="page-item">
+                                    <button className={`page-link rounded-0 ${page+1>=totalPage[totalPage.length-1]?"disabled":""}`}
+                                            onClick={()=> setPage(totalPage[totalPage.length-1])} aria-label="Next">
+                                        <small aria-hidden="true">&gt;&gt;</small>
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
 
@@ -223,28 +186,31 @@ export function CustomerList() {
                 idDelete={idDelete}
                 nameDelete={nameDelete}
             />
-            {/*<div>*/}
-            {/*    <button className="btn btn-sm btn-success" onClick={handleClick}>*/}
-            {/*        Alert*/}
-            {/*    </button>*/}
-            {/*    <SweetAlert2 {...swalProps}*/}
-            {/*                 didOpen={() => {*/}
-            {/*                     // run when swal is opened...*/}
-            {/*                 }}*/}
-            {/*                 didClose={() => {*/}
-            {/*                     // run when swal is closed...*/}
-            {/*                 }}*/}
-            {/*                 onConfirm={result => {*/}
-            {/*                     // run when clieked in confirm and promise is resolved...*/}
-            {/*                 }}*/}
-            {/*                 onError={error => {*/}
-            {/*                     // run when promise rejected...*/}
-            {/*                 }}*/}
-            {/*                 onResolve={result => {*/}
-            {/*                     // run when promise is resolved...*/}
-            {/*                 }}*/}
-            {/*    />*/}
-            {/*</div>*/}
+            <div>
+                {/*<div>*/}
+                {/*    <button className="btn btn-sm btn-success" onClick={handleClick}>*/}
+                {/*        Alert*/}
+                {/*    </button>*/}
+                {/*    <SweetAlert2 {...swalProps}*/}
+                {/*                 didOpen={() => {*/}
+                {/*                     // run when swal is opened...*/}
+                {/*                 }}*/}
+                {/*                 didClose={() => {*/}
+                {/*                     // run when swal is closed...*/}
+                {/*                 }}*/}
+                {/*                 onConfirm={result => {*/}
+                {/*                     // run when clieked in confirm and promise is resolved...*/}
+                {/*                 }}*/}
+                {/*                 onError={error => {*/}
+                {/*                     // run when promise rejected...*/}
+                {/*                 }}*/}
+                {/*                 onResolve={result => {*/}
+                {/*                     // run when promise is resolved...*/}
+                {/*                 }}*/}
+                {/*    />*/}
+                {/*</div>*/}
+            </div>
+
         </>
     )
 }

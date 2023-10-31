@@ -1,8 +1,8 @@
 import axios from "axios";
 const URL_FACILITY = "http://localhost:8080/facilities";
-export const getAllFacility = async () => {
+export const getAllFacility = async (name) => {
     try {
-        let res = await axios.get(URL_FACILITY);
+        let res = await axios.get(URL_FACILITY+`?name_like=${name}`);
         return res.data;
     } catch (e){
         alert("Error!")

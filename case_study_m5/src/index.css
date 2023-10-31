@@ -58,11 +58,11 @@ body{
 }
 
 #fix-tbody{
-  min-height: 60vh;
+  min-height: 512px;
 }
 
 .footer{
-  margin-top: 26px;
+  margin-top: 20px;
   background-color: #a0d8ee;
   height: 70px;
   display: flex;

@@ -7,28 +7,42 @@ export function FacilityList() {
     const [facilities, setFacilities] = useState([]);
     const [idDelete, setIdDelete] = useState();
     const [nameDelete, setNameDelete] = useState();
+    const [nameSearch, setNameSearch] = useState("");
+
     useEffect(() => {
         getAll();
-    }, [])
+        console.log(getAll())
+        console.log(nameSearch)
+    }, [nameSearch])
+
 
     const getAll = async () => {
-        let response = await facilityService.getAllFacility();
-        setFacilities(response);
+        let data = await facilityService.getAllFacility(nameSearch);
+        setFacilities(data);
     }
+
     const showModal = (id, name) => {
         setIdDelete(id);
         setNameDelete(name);
     }
+
     return (
         <>
             <div className="container body">
-                <div>
+                <div className="d-flex pt-3 mb-3">
                     <NavLink
                         to="/facilities/create"
-                        className="btn btn-sm btn-primary mt-3 mb-3 rounded-0"
+                        className="btn btn-sm btn-primary rounded-0 me-3"
                     >
                         Create facility
                     </NavLink>
+                    {/*<div className="w-75 d-flex align-items-center">*/}
+                        <input className="form-control-sm rounded-0 border-1 w-25" placeholder="Search name..."
+                               name="nameSearch"
+                            onChange={(event) => setNameSearch(event.target.value)}
+                        />
+                    {/*</div>*/}
+
                 </div>
                 <div className="row">
                     {

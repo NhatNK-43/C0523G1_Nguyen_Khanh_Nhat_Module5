@@ -18,12 +18,10 @@ export function CustomerUpdate() {
 
     useEffect(() => {
         getCustomerById();
-        // getAllCustomerType();
     }, [id]);
 
     const getCustomerById = async () => {
         let data = await customerService.getCustomerById(id);
-        // res.customerType = res.customerType + "";
         data.gender = data.gender + "";
         setCustomer(data);
     }
