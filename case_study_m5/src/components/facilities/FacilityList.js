@@ -46,7 +46,7 @@ export function FacilityList() {
                                                 <button className="btn btn-sm btn-outline-danger rounded-0"
                                                         type="button"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#staticBackdrop"
+                                                        data-bs-target="#deleteFacility"
                                                         onClick={() => showModal(facility.id, facility.name)}
                                                 >Delete
                                                 </button>

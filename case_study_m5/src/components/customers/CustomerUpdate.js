@@ -26,7 +26,6 @@ export function CustomerUpdate() {
         // res.customerType = res.customerType + "";
         data.gender = data.gender + "";
         setCustomer(data);
-        // console.log(res);
     }
 
     const getAllCustomerType = async () => {
@@ -42,6 +41,8 @@ export function CustomerUpdate() {
         ...customer,
         customerType: JSON.stringify(customer.customerType)
     };
+
+    console.log(customer);
 
     const d = new Date();
     const date = (d.getFullYear() - 18) + "-" + (d.getMonth() + 1) + "-" + d.getDate();
@@ -67,8 +68,8 @@ export function CustomerUpdate() {
     }
 
     const update = async (values) => {
+        console.log(values)
         values.customerType = JSON.parse(values.customerType);
-        values.gender = +values.gender;
         let status = await customerService.updateCustomer(values);
         if (status === 200) {
             toast.success("Update successfully!");
@@ -134,13 +135,13 @@ export function CustomerUpdate() {
                                             <div className="form-check form-check-inline">
                                                 <Field className="form-check-input" type="radio" name="gender"
                                                        id="inlineRadio1"
-                                                       value="1"/>
+                                                       value="true"/>
                                                 <label className="form-check-label" htmlFor="inlineRadio1">Male</label>
                                             </div>
                                             <div className="form-check form-check-inline">
                                                 <Field className="form-check-input" type="radio" name="gender"
                                                        id="inlineRadio2"
-                                                       value="0"/>
+                                                       value="false"/>
                                                 <label className="form-check-label"
                                                        htmlFor="inlineRadio2">Female</label>
                                             </div>
@@ -227,7 +228,7 @@ export function CustomerUpdate() {
                                         <label className="form-label col-sm-3"/>
                                         <div className="col-sm-9">
                                             <NavLink
-                                                to="/customers"
+                                                to="/facilities"
                                                 className="btn btn-sm btn-secondary me-4 rounded-0"
                                             >
                                                 Back

@@ -2,7 +2,7 @@ import * as facilityTypeService from "../../service/facility_type_service";
 import * as accompaniedServiceService from "../../service/accompanied_service_service";
 import * as facilityService from "../../service/facility_service";
 import {NavLink, useNavigate, useParams} from "react-router-dom";
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import {Formik, Form, Field, ErrorMessage, FieldArray} from "formik";
 import {toast} from "react-toastify";
 import * as Yup from "yup";
 import {useEffect, useState} from "react";
@@ -11,18 +11,19 @@ export function FacilityUpdate() {
     const navigate = useNavigate();
     const [facilityTypes, setFacilityTypes] = useState([]);
     const [facility, setFacility] = useState();
-    const [facilityTypeId, setFacilityTypeId] = useState(1);
     const [accompaniedServices, setAccompaniedServices] = useState([]);
     const {id} = useParams();
+    const otherUtilities = ["Elevator", "Hairdryer", "Television", "Money safe"];
+    const freeServices = ["Have breakfast", "Parking and shuttle", "Air conditional", "Wifi"];
 
     useEffect(() => {
         getAllFacilityType();
         getAllAccompaniedService();
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         getFacilityById();
-    },[id])
+    }, [id])
     const getAllFacilityType = async () => {
         let data = await facilityTypeService.getAllFacilityType();
         setFacilityTypes(data);
@@ -33,23 +34,37 @@ export function FacilityUpdate() {
         setAccompaniedServices(data);
     }
 
-    const getFacilityById = async ()=>{
+    const getFacilityById = async () => {
         let data = await facilityService.getFacilityById(id);
         setFacility(data);
     }
 
-    if (!facilityTypes || !accompaniedServices||!facility) {
+    const checkAccompaniedService = (accompaniedService, accompaniedServices) =>
+        accompaniedServices.find(a => a === accompaniedService);
+
+    if (!facilityTypes || !accompaniedServices || !facility) {
         return null;
     }
 
     const initValue = {
         ...facility,
-        facilityType: JSON.stringify(facility.facilityType)
+        accompaniedServices:
+            facility.accompaniedServices.map((a, index) => {
+                facility.accompaniedServices[index] = JSON.stringify(facility.accompaniedServices[index])
+                facility.accompaniedServices[index] = facility.accompaniedServices[index].replaceAll(/\\+|"{3}/g, "")
+                facility.accompaniedServices[index] = facility.accompaniedServices[index].replaceAll(/"\{/g, "{")
+                facility.accompaniedServices[index] = facility.accompaniedServices[index].replaceAll(/}"/g, "}")
+            })
+
     }
 
-    // const d = new Date();
-    // const date = (d.getFullYear() - 18) + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-    //
+    accompaniedServices.map((a, index) => {
+        accompaniedServices[index] = JSON.stringify(accompaniedServices[index])
+        accompaniedServices[index] = accompaniedServices[index].replaceAll(/\\+|"{3}/g, "")
+        accompaniedServices[index] = accompaniedServices[index].replaceAll(/"\{/g, "{")
+        accompaniedServices[index] = accompaniedServices[index].replaceAll(/}"/g, "}")
+    })
+
     const validateObject = {
         name: Yup.string()
             .required("Please enter facility name"),
@@ -61,32 +76,54 @@ export function FacilityUpdate() {
             .min(20, "The pool area must be greater than 20"),
         capacity: Yup.number()
             .required("Please enter capacity")
-            .min(1, "The capacity must be greater than 0"),
-        rentalType: Yup.number()
+            .min(1, "The capacity must be greater than 0")
+            .integer("The capacity must be an integer number"),
+        rentalType: Yup.string()
             .required("Please select rental type"),
-        poolArea: Yup.number()
-            .required("Please enter pool area")
-            .min(20, "The pool area must be greater than 20"),
-        numberFloor: Yup.number()
-            .required("Please enter number of floor")
-            .min(1, "The number of floor must be greater than 0")
+        poolArea: facility.id !== 3 ?
+            Yup.number()
+                .required("Please enter pool area")
+                .min(20, "The pool area must be greater than 20")
+            :
+            Yup.number().notRequired(),
+        numberFloor:
+            facility.id !== 3 ?
+                Yup.number()
+                    .required("Please enter number of floor")
+                    .min(1, "The number of floor must be greater than 0")
+                    .integer("The number of floor must be an integer number")
+                :
+                Yup.number().notRequired(),
     }
 
     const update = async (values) => {
-        values.area = +values.area;
-        values.rentalCosts = +values.rentalCosts;
-        values.capacity = +values.capacity;
-        values.poolArea = +values.poolArea;
-        values.numberFloor = +values.numberFloor;
-        values.accompaniedService = JSON.parse(values.accompaniedService);
-        let status = await facilityService.createFacility(values);
+        console.log(values)
+        // values.accompaniedServices = values.accompaniedServices.filter((item) => item !== "").flat();
+        values.accompaniedServices.map((item, index) => {
+            values.accompaniedServices[index] = JSON.parse(values.accompaniedServices[index]);
+        })
+
+        // values.freeServices = values.freeServices.filter((item)=>item!=="").flat();
+        // values.otherUtilities = values.otherUtilities.filter((item)=>item!=="").flat();
+        //
+        // if(facility.facilityType.id===3){
+        //     values.freeServices = values.freeServices.filter((item)=>item!=="").flat();
+        // } else {
+        //     values.otherUtilities = values.otherUtilities.filter((item)=>item!=="").flat();
+        // }
+
+        let status = await facilityService.updateFacility(values);
         if (status === 200) {
             toast.success("Update successfully!");
             navigate("/facilities");
         } else {
             toast.error("Update failed!");
-            navigate("/facilities/create");
+            navigate(`/facilities/update/${facility.id}`);
         }
+    }
+
+    if (!facility){
+        return null;
     }
 
     return (
@@ -97,43 +134,16 @@ export function FacilityUpdate() {
                     <div className="col-md-6 shadow p-0">
                         <div className="form-control p-5 rounded-0">
                             <div className="mb-5">
-                                <h2 className="text-primary">Update Facility</h2>
+                                <h2 className="text-primary">Update {facility.facilityType.name}</h2>
                             </div>
                             <Formik
-                                initialValues={initValue}
+                                initialValues={facility}
                                 onSubmit={values => {
                                     update(values);
                                 }}
-                                validationSchema={Yup.object(validateObject)}
+                                // validationSchema={Yup.object(validateObject)}
                             >
                                 <Form>
-                                    <div className="row mb-3">
-                                        <label htmlFor="facilityType" className="form-label col-sm-3">
-                                            Facility Type
-                                        </label>
-                                        <div className="col-sm-9">
-                                            <Field
-                                                className="form-select"
-                                                aria-label="Default select example"
-                                                component="select"
-                                                name="facilityType"
-                                                id="facilityType"
-                                            >
-                                                {
-                                                    facilityTypes.map((facilityType) => (
-                                                        <option
-                                                            key={facilityType.id}
-                                                            value={JSON.stringify(facilityType)}
-                                                            onChange={(event) =>
-                                                                setFacilityTypeId(event.target.value)}
-                                                        >
-                                                            {facilityType.name}
-                                                        </option>
-                                                    ))
-                                                }
-                                            </Field>
-                                        </div>
-                                    </div>
                                     <div className="row mb-3">
                                         <label htmlFor="name" className="form-label col-sm-3">
                                             Name
@@ -173,12 +183,15 @@ export function FacilityUpdate() {
                                                 name="rentalType"
                                                 id="rentalType"
                                             >
+                                                <option defaultValue="">--Select--</option>
                                                 <option value="hours">Hours</option>
                                                 <option value="day">Day</option>
                                                 <option value="month">Month</option>
                                                 <option value="year">Year</option>
-
                                             </Field>
+                                            <ErrorMessage name="rentalType" component="div"
+                                                          className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
                                         </div>
                                     </div>
                                     <div className="row mb-3">
@@ -207,48 +220,52 @@ export function FacilityUpdate() {
                                         </div>
                                     </div>
                                     {
-                                        facilityTypeId === 3 ?
+                                        facility.facilityType.id === 3 ?
                                             <div className="row mb-3">
                                                 <label className="form-label col-sm-3">
-                                                    Other Utilities
+                                                    Free Service
                                                 </label>
                                                 <div className="col-sm-9">
-                                                    <div className="form-check form-check-inline">
-                                                        <Field className="form-check-input" type="checkbox"
-                                                               name="otherUtilities"
-                                                               id="inlineRadio1"
-                                                               value="Free wifi"/>
-                                                        <label className="form-check-label"
-                                                               htmlFor="inlineRadio1">Free wifi</label>
-                                                    </div>
-                                                    <div className="form-check form-check-inline">
-                                                        <Field className="form-check-input" type="checkbox"
-                                                               name="otherUtilities"
-                                                               id="inlineRadio2"
-                                                               value="Hairdryer"/>
-                                                        <label className="form-check-label"
-                                                               htmlFor="inlineRadio2">Hairdryer</label>
-                                                    </div>
-                                                    <div className="form-check form-check-inline">
-                                                        <Field className="form-check-input" type="checkbox"
-                                                               name="otherUtilities"
-                                                               id="inlineRadio3"
-                                                               value="Air conditional"/>
-                                                        <label className="form-check-label"
-                                                               htmlFor="inlineRadio3">Air conditional</label>
-                                                    </div>
-                                                    <div className="form-check form-check-inline">
-                                                        <Field className="form-check-input" type="checkbox"
-                                                               name="otherUtilities"
-                                                               id="inlineRadio4"
-                                                               value="Minibar"/>
-                                                        <label className="form-check-label"
-                                                               htmlFor="inlineRadio4">Minibar</label>
+
+                                                    <div>
+                                                        {
+                                                            freeServices.map((freeService, index) => (
+                                                                <div className="form-check form-check-inline"
+                                                                     key={index}>
+                                                                    <Field className="form-check-input" type="checkbox"
+                                                                           name="freeServices"
+                                                                           value={freeService}
+                                                                           id={`freeServices${freeService}`}
+                                                                    />
+                                                                    <label className="form-check-label"
+                                                                           htmlFor={`freeServices${freeService}`}>{freeService}</label>
+                                                                </div>
+                                                            ))
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
                                             :
                                             <div>
+                                                {
+                                                    facility.facilityType.id === 1 &&
+                                                    <div className="row mb-3">
+                                                        <label htmlFor="poolArea" className="form-label col-sm-3">
+                                                            Pool area
+                                                        </label>
+                                                        <div className="col-sm-9">
+                                                            <Field
+                                                                type="number"
+                                                                id="poolArea"
+                                                                name="poolArea"
+                                                                className="form-control"
+                                                            />
+                                                            <ErrorMessage name="poolArea" component="div"
+                                                                          className="mt-2 form-text text-danger"
+                                                            ></ErrorMessage>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 <div className="row mb-3">
                                                     <label htmlFor="roomStandards" className="form-label col-sm-3">
                                                         Room Standards
@@ -269,19 +286,24 @@ export function FacilityUpdate() {
                                                     </div>
                                                 </div>
                                                 <div className="row mb-3">
-                                                    <label htmlFor="poolArea" className="form-label col-sm-3">
-                                                        Pool area
+                                                    <label className="form-label col-sm-3">
+                                                        Other Utilities
                                                     </label>
                                                     <div className="col-sm-9">
-                                                        <Field
-                                                            type="number"
-                                                            id="poolArea"
-                                                            name="poolArea"
-                                                            className="form-control"
-                                                        />
-                                                        <ErrorMessage name="poolArea" component="div"
-                                                                      className="mt-2 form-text text-danger"
-                                                        ></ErrorMessage>
+                                                        {
+                                                            otherUtilities.map((otherUtility, index) => (
+                                                                <div className="form-check form-check-inline"
+                                                                     key={index}>
+                                                                    <Field className="form-check-input" type="checkbox"
+                                                                           name="otherUtilities"
+                                                                           id={`otherUtilities${index}`}
+                                                                           value={otherUtility}
+                                                                    />
+                                                                    <label className="form-check-label"
+                                                                           htmlFor={`otherUtilities${index}`}>{otherUtility}</label>
+                                                                </div>
+                                                            ))
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div className="row mb-3">
@@ -300,34 +322,50 @@ export function FacilityUpdate() {
                                                         ></ErrorMessage>
                                                     </div>
                                                 </div>
-                                                <div className="row mb-3">
-                                                    <label className="form-label col-sm-3">
-                                                        Accompanied Service
-                                                    </label>
-                                                    <div className="col-sm-9">
-                                                        {
-                                                            accompaniedServices.map((accompaniedService, index) => (
-                                                                <div className="form-check form-check-inline">
-                                                                    <Field className="form-check-input" type="checkbox"
-                                                                           name="accompaniedService"
-                                                                           id={`accompaniedService${index}`}
-                                                                           key={accompaniedService.id}
-                                                                           value={JSON.stringify(accompaniedService)}/>
-                                                                    <label className="form-check-label"
-                                                                           htmlFor={`accompaniedService${index}`}>{accompaniedService.name}</label>
-                                                                </div>
-                                                            ))
-                                                        }
-                                                    </div>
-                                                </div>
                                             </div>
-
                                     }
+                                    <div className="row mb-3">
+                                        <label className="form-label col-sm-3">
+                                            Accompanied Service
+                                        </label>
+                                        <div className="col-sm-9">
+                                            {
+                                                accompaniedServices.map((accompaniedService, index) => (
+                                                    <div className="form-check form-check-inline"
+                                                         key={JSON.parse(accompaniedService).id}>
+                                                        <Field className="form-check-input" type="checkbox"
+                                                               name="accompaniedServices"
+                                                               value={accompaniedService}
+                                                               checked={
+                                                                   checkAccompaniedService(accompaniedService, facility.accompaniedServices)
+                                                               }
+                                                               id={`accompaniedService${index}`}
+                                                        />
+                                                        <label className="form-check-label"
+                                                               htmlFor={`accompaniedService${index}`}>{JSON.parse(accompaniedService).name}</label>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className="row mb-3">
+                                        <label htmlFor="pathImage" className="form-label col-sm-3">
+                                            Path Image
+                                        </label>
+                                        <div className="col-sm-9">
+                                            <Field type="text" id="pathImage" name="pathImage"
+                                                   className="form-control"/>
+                                            <ErrorMessage name="pathImage" component="div"
+                                                          className="mt-2 form-text text-danger"
+                                            ></ErrorMessage>
+                                        </div>
+                                    </div>
+
                                     <div className="row mb-3">
                                         <label className="form-label col-sm-3"/>
                                         <div className="col-sm-9">
                                             <NavLink
-                                                to="/customers"
+                                                to="/facilities"
                                                 className="btn btn-sm btn-secondary me-4 rounded-0"
                                             >
                                                 Back

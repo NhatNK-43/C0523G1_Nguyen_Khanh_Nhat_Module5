@@ -16,13 +16,13 @@ function Header() {
             <div className="header fixed-top">
                 <nav className="navbar navbar-expand-lg">
                     <div className="container">
-                        <NavLink className="navbar-brand" to="/">
+                        <NavLink className="navbar-brand ms-3" to="/">
                             <img src="/images/logo-furama.png" style={{height:"70px"}} alt="..."/>
                         </NavLink>
-                        <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes"/>
-                                <label className="form-check-label" htmlFor="mySwitch">Dark Mode</label>
-                        </div>
+                        {/*<div className="form-check form-switch">*/}
+                        {/*    <input className="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes"/>*/}
+                        {/*        <label className="form-check-label" htmlFor="mySwitch">Dark Mode</label>*/}
+                        {/*</div>*/}
                         <button
                             className="navbar-toggler"
                             type="button"

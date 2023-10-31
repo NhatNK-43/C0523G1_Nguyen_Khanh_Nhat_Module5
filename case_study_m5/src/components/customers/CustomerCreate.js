@@ -47,7 +47,7 @@ export function CustomerCreate() {
     const create = async (values) => {
         values.gender = +values.gender;
         let status = await customerService.createCustomer(values);
-        if (status === 201) {
+        if (status === 200) {
             toast.success("Create successfully!");
             navigate("/customers");
         } else {
@@ -117,23 +117,6 @@ export function CustomerCreate() {
                                                 <label className="form-check-label" htmlFor="inlineRadio2">Female</label>
                                             </div>
                                         </div>
-                                        {/*<div className="col-sm-9">*/}
-                                        {/*    <select*/}
-                                        {/*        className="form-select col-sm-9"*/}
-                                        {/*        aria-label="Default select example"*/}
-                                        {/*        name="area"*/}
-                                        {/*        id="gender"*/}
-                                        {/*        name="gender"*/}
-                                        {/*        */}
-                                        {/*    >*/}
-                                        {/*        <option value="0" selected="">*/}
-                                        {/*            Select*/}
-                                        {/*        </option>*/}
-                                        {/*        <option value="1">Male</option>*/}
-                                        {/*        <option value="2">Female</option>*/}
-                                        {/*        <option value="3">Other</option>*/}
-                                        {/*    </select>*/}
-                                        {/*</div>*/}
                                     </div>
                                     <div className="row mb-3">
                                         <label htmlFor="idCard" className="form-label col-sm-3">
@@ -172,29 +155,6 @@ export function CustomerCreate() {
                                             ></ErrorMessage>
                                         </div>
                                     </div>
-                                    {/*<div className="row mb-3">*/}
-                                    {/*    <label htmlFor="customerType" className="form-label col-sm-3">*/}
-                                    {/*        Customer type*/}
-                                    {/*    </label>*/}
-                                    {/*    <div className="col-sm-9">*/}
-                                    {/*        <select*/}
-                                    {/*            className="form-select col-sm-9"*/}
-                                    {/*            aria-label="Default select example"*/}
-                                    {/*            name="area"*/}
-                                    {/*            id="customerType"*/}
-                                    {/*            */}
-                                    {/*        >*/}
-                                    {/*            <option value="" selected="">*/}
-                                    {/*                Select*/}
-                                    {/*            </option>*/}
-                                    {/*            <option>Member</option>*/}
-                                    {/*            <option>Silver</option>*/}
-                                    {/*            <option>Gold</option>*/}
-                                    {/*            <option>Platinum</option>*/}
-                                    {/*            <option>Diamond</option>*/}
-                                    {/*        </select>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
                                     <div className="row mb-3">
                                         <label htmlFor="address" className="form-label col-sm-3">
                                             Address

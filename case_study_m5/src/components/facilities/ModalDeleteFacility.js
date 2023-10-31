@@ -14,7 +14,7 @@ export function ModalDeleteFacility({idDelete, nameDelete, setFacilities}){
         <>
             <div
                 className="modal fade"
-                id="deleteContract"
+                id="deleteFacility"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
                 tabIndex={-1}

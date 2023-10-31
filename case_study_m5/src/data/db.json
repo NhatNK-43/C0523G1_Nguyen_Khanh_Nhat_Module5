@@ -35,7 +35,10 @@
         "id": 2,
         "name": "Sliver"
       },
-      "customerTypes": {"id":2,"name":"Sliver"}
+      "customerTypes": {
+        "id": 2,
+        "name": "Sliver"
+      }
     },
     {
       "id": 2,
@@ -526,10 +529,37 @@
         "id": 1,
         "name": "Member"
       }
+    },
+    {
+      "name": "Trần Tứ Xuyên",
+      "dateOfBirth": "1997-12-23",
+      "gender": 1,
+      "idCard": "048089888991",
+      "phoneNumber": "0965757575",
+      "email": "xuyentt@gmail.com",
+      "address": "217 Nguyễn Thị Minh Khai, TP. Đà Nẵng",
+      "customerType": {
+        "id": 2,
+        "name": "Sliver"
+      },
+      "id": 37
+    },
+    {
+      "name": "Trần Tứ Xuyên",
+      "dateOfBirth": "1997-12-23",
+      "gender": 1,
+      "idCard": "048089888991",
+      "phoneNumber": "0965757575",
+      "email": "xuyentt@gmail.com",
+      "address": "217 Nguyễn Thị Minh Khai, TP. Đà Nẵng",
+      "customerType": {
+        "id": 2,
+        "name": "Sliver"
+      },
+      "id": 38
     }
   ],
-
-  "facilityType":[
+  "facilityType": [
     {
       "id": 1,
       "name": "Villa"
@@ -543,8 +573,7 @@
       "name": "Room"
     }
   ],
-  
-  "accompaniedService": [
+  "accompaniedServices": [
     {
       "id": 1,
       "name": "Massage",
@@ -565,7 +594,7 @@
     },
     {
       "id": 4,
-      "name": "Drink",
+      "name": "Drinks",
       "unit": "Portion",
       "price": 50000
     },
@@ -576,164 +605,177 @@
       "price": 70000
     }
   ],
-  
-  "facilities":[
+  "facilities": [
     {
-      "id": "1",
+      "id": 1,
       "name": "SEA VIEW SUITE",
-      "area": "85,8",
+      "area": "85.8",
       "rentalCosts": "6800000",
       "capacity": "2",
       "rentalType": "day",
       "pathImage": "/images/facilities/1-Ocean-Suite-Feature-768x497.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "STUDIO SUITE SEA VIEW",
-      "area": "40,1",
+      "area": "40.1",
       "rentalCosts": "4500000",
       "capacity": "2",
       "rentalType": "day",
       "pathImage": "/images/facilities/2-Ocean-Studio-Suite-F-768x497.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "DELUXE ROOM SEA VIEW",
-      "area": "43,7",
+      "area": "43.7",
       "rentalCosts": "5700000",
       "capacity": "2",
       "rentalType": "day",
       "pathImage": "/images/facilities/3-Ocean-Deluxe-2-450x291.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "SUPERIOR LAKE VIEW ROOM",
-      "area": "40,1",
+      "area": "40.1",
       "rentalCosts": "4200000",
       "capacity": "4",
       "rentalType": "day",
       "pathImage": "/images/facilities/4-Lagoon-Superior-twin-bed-F-768x497.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "SUPERIOR ROOM GARDEN VIEW",
-      "area": "40,1",
+      "area": "40.1",
       "rentalCosts": "4200000",
       "capacity": "4",
       "rentalType": "day",
       "pathImage": "/images/facilities/5-Garden-Superior-TwinBed-1-F-768x497.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "DELUXE ROOM GARDEN VIEW",
-      "area": "43,7",
+      "area": "43.7",
       "rentalCosts": "4800000",
       "capacity": "4",
       "rentalType": "day",
       "pathImage": "/images/facilities/6-Garden-Deluxe-5-450x291.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "PRESIDENTIAL SUITE",
       "area": "130",
       "rentalCosts": "12000000",
       "capacity": "2",
       "rentalType": "day",
       "pathImage": "/images/facilities/7-Presidential-Suite-F-768x497.jpg",
-      "freeService": "Have breakfast",
+      "freeServices": [
+        "Have breakfast"
+      ],
       "facilityType": {
         "id": 3,
         "name": "Room"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        }
       ]
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "SEA VIEW VILLA WITH PRIVATE SWIMMING POOL",
       "area": "900",
       "rentalCosts": "25000000",
@@ -741,24 +783,41 @@
       "rentalType": "day",
       "pathImage": "/images/facilities/8-Villas_Beach_Pool_Villas-_Exterior-1-F-768x497.jpg",
       "roomStandards": "Superior",
-      "otherUtilities": ["Free wifi","Hairdryer","Air conditional","Minibar"],
+      "otherUtilities": [
+        "Elevator",
+        "Hairdryer",
+        "Television",
+        "Money safe"
+      ],
       "poolArea": 40,
       "numberFloor": 2,
       "facilityType": {
         "id": 1,
         "name": "Villa"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        },
+        {
+          "id": 4,
+          "name": "Drinks",
+          "unit": "Portion",
+          "price": 50000
+        },
+        {
+          "id": 1,
+          "name": "Massage",
+          "unit": "Person",
+          "price": 500000
+        }
       ]
     },
     {
-      "id": "9",
+      "id": 9,
       "name": "GARDEN VIEW VILLA WITH PRIVATE POOL",
       "area": "320",
       "rentalCosts": "16000000",
@@ -766,24 +825,170 @@
       "rentalType": "day",
       "pathImage": "/images/facilities/9-Villas_Pool_Villas-F-768x497.jpg",
       "roomStandards": "Suite",
-      "otherUtilities": ["Free wifi","Hairdryer","Air conditional","Minibar"],
+      "otherUtilities": [
+        "Elevator",
+        "Hairdryer",
+        "Television",
+        "Money safe"
+      ],
       "poolArea": 40,
       "numberFloor": 2,
       "facilityType": {
         "id": 1,
         "name": "Villa"
       },
-      "accompaniedService": [
+      "accompaniedServices": [
         {
-        "id": 2,
-        "name": "Karaoke",
-        "unit": "Hours",
-        "price": 300000
-      }
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        },
+        {
+          "id": 4,
+          "name": "Drinks",
+          "unit": "Portion",
+          "price": 50000
+        },
+        {
+          "id": 3,
+          "name": "Food",
+          "unit": "Portion",
+          "price": 150000
+        }
       ]
+    },
+    {
+      "name": "Room 12",
+      "area": 323,
+      "rentalCosts": 1233333333,
+      "capacity": 3,
+      "rentalType": "day",
+      "pathImage": "https://greenviet.vn/wp-content/uploads/2021/06/Thiet-ke-villa-dep-hien-dai-view-bien-greenviet-2822-08.jpg",
+      "freeServices": [
+        "Have breakfast",
+        "Air conditional",
+        "Parking and shuttle"
+      ],
+      "roomStandards": "",
+      "poolArea": 0,
+      "numberFloor": 0,
+      "otherUtilities": [],
+      "accompaniedServices": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        },
+        {
+          "id": 4,
+          "name": "Drinks",
+          "unit": "Portion",
+          "price": 50000
+        },
+        {
+          "id": 5,
+          "name": "Car rental",
+          "unit": "Person",
+          "price": 70000
+        }
+      ],
+      "facilityType": {
+        "id": 3,
+        "name": "Room"
+      },
+      "id": 10
+    },
+    {
+      "name": "Room 22",
+      "area": 32,
+      "rentalCosts": 11511,
+      "capacity": 3,
+      "rentalType": "day",
+      "pathImage": "https://greenviet.vn/wp-content/uploads/2021/06/Thiet-ke-villa-dep-hien-dai-view-bien-greenviet-2822-08.jpg",
+      "freeServices": [
+        "Have breakfast",
+        "Wifi"
+      ],
+      "roomStandards": "",
+      "poolArea": 0,
+      "numberFloor": 0,
+      "otherUtilities": [],
+      "accompaniedServices": [
+        {
+          "id": 4,
+          "name": "Drinks",
+          "unit": "Portion",
+          "price": 50000
+        },
+        {
+          "id": 5,
+          "name": "Car rental",
+          "unit": "Person",
+          "price": 70000
+        },
+        {
+          "id": 1,
+          "name": "Massage",
+          "unit": "Person",
+          "price": 500000
+        }
+      ],
+      "facilityType": {
+        "id": 3,
+        "name": "Room"
+      },
+      "id": 11
+    },
+    {
+      "name": "Room 43",
+      "area": 54,
+      "rentalCosts": 6000000,
+      "capacity": 4,
+      "rentalType": "day",
+      "pathImage": "https://greenviet.vn/wp-content/uploads/2021/06/Thiet-ke-villa-dep-hien-dai-view-bien-greenviet-2822-08.jpg",
+      "freeServices": [
+        "Have breakfast",
+        "Air conditional",
+        "Wifi"
+      ],
+      "roomStandards": "",
+      "poolArea": 0,
+      "numberFloor": 0,
+      "otherUtilities": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "accompaniedServices": [
+        {
+          "id": 2,
+          "name": "Karaoke",
+          "unit": "Hours",
+          "price": 300000
+        },
+        {
+          "id": 3,
+          "name": "Food",
+          "unit": "Portion",
+          "price": 150000
+        },
+        {
+          "id": 4,
+          "name": "Drinks",
+          "unit": "Portion",
+          "price": 50000
+        }
+      ],
+      "facilityType": {
+        "id": 3,
+        "name": "Room"
+      },
+      "id": 12
     }
   ],
-  
   "contracts": [
     {
       "id": "1",

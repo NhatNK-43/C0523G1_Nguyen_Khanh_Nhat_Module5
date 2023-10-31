@@ -44,3 +44,12 @@ export const deleteFacility = async (id) => {
         alert("Error!")
     }
 }
+
+// export const uploadImage = async () => {
+//     try {
+//         let res = await axios.post("/upload", fromData);
+//         return res.status;
+//     } catch (e){
+//         alert("Error!")
+//     }
+// }
