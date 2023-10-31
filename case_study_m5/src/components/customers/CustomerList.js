@@ -11,10 +11,8 @@ export function CustomerList() {
     const [nameSearch, setNameSearch] = useState("");
     const [customerTypeId, setCustomerTypeId] = useState({id: 0, name: ""});
     const [customerTypes, setCustomerTypes] = useState([]);
-    const [number, setNumber] = useState(10);
     const [totalPage, setTotalPage] = useState([]);
     const [page, setPage] = useState(0);
-    const [swalProps, setSwalProps] = useState({});
 
 
     useEffect(() => {
@@ -30,7 +28,8 @@ export function CustomerList() {
         setTotalPage(totalP);
         setCustomers(res.data.content);
     }
-
+    console.log(page)
+    console.log(totalPage)
     const getAllCustomerType = async () => {
         const data = await customerTypeService.getAllCustomerType();
         setCustomerTypes(data);
@@ -42,6 +41,15 @@ export function CustomerList() {
             arr[i] = i + 1;
         }
         return arr;
+    }
+
+    const handleSearchCustomerName = (event)=>{
+        setNameSearch(event);
+        setPage(0);
+    }
+    const handleSearchCustomerType = (event)=>{
+        setCustomerTypeId(event);
+        setPage(0);
     }
 
     const showModal = (id, name) => {
@@ -65,13 +73,13 @@ export function CustomerList() {
                         </NavLink>
                         <input className="form-control-sm rounded-0 border-1 w-25 ms-3" placeholder="Search name..."
                                name="nameSearch"
-                               onChange={(event) => setNameSearch(event.target.value)}/>
+                               onChange={(event) => handleSearchCustomerName(event.target.value)}/>
 
                         <select
                             className="form-select-sm border-1 rounded-0"
                             aria-label="Default select example"
                             name="customerTypeId"
-                            onChange={(event)=> setCustomerTypeId(JSON.parse(event.target.value))}
+                            onChange={(event)=> handleSearchCustomerType(JSON.parse(event.target.value))}
                         >
                             <option value='{"id":0,"name":""}'>All customer type</option>
                             {
@@ -165,12 +173,12 @@ export function CustomerList() {
                                 }
 
                                 <li className="page-item">
-                                    <button className={`page-link rounded-0 ${page+1>=totalPage[totalPage.length-1]?"disabled":""}`} onClick={()=>setPage(page+1)} aria-label="Next">
+                                    <button className={`page-link rounded-0 ${page+1>=totalPage[totalPage.length-1]||totalPage.length===0?"disabled":""}`} onClick={()=>setPage(page+1)} aria-label="Next">
                                         <small aria-hidden="true">&gt;</small>
                                     </button>
                                 </li>
                                 <li className="page-item">
-                                    <button className={`page-link rounded-0 ${page+1>=totalPage[totalPage.length-1]?"disabled":""}`}
+                                    <button className={`page-link rounded-0 ${page+1>=totalPage[totalPage.length-1]||totalPage.length===0?"disabled":""}`}
                                             onClick={()=> setPage(totalPage[totalPage.length-1])} aria-label="Next">
                                         <small aria-hidden="true">&gt;&gt;</small>
                                     </button>
